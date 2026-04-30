@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "Kodukulla.Phani_Kumar_Sharma-main",
+			"path": "../.."
+		},
+		{
+			"name": "Phani Kumar Kodukulla",
+			"path": "../../../../Phani Kumar Kodukulla"
+		}
+	],
+	"settings": {
+		"powershell.cwd": "Phani Kumar Kodukulla"
+	}
+}

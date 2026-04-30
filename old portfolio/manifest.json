@@ -1,0 +1,21 @@
+{
+  "name": "K.Phani Kumar",
+  "short_name": "K.Phani",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "description": "I am a web developer and robotics enthusiast and I bridge the gap between AI and robots.",
+  "icons": [
+    {
+      "src": "/my-profile.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/my-profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

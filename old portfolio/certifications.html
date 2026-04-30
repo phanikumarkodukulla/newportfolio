@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Certifications Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        @font-face {
+            font-family: 'ProductSans';
+            src: url('ProductSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #6366F1;
+            --accent-color: #3B82F6;
+            --dark-bg: #0A1929;
+            --darker-bg: #020817;
+            --navy-blue: #1E3A5F;
+            --light-navy: #2C5282;
+            --light-text: #E8F1F5;
+            --dark-text: #1A202C;
+            --card-bg: #0F2942;
+            --card-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #2563EB 0%, #6366F1 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ProductSans', 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, var(--navy-blue) 100%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Back to Home Button */
+        .back-to-home-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-to-home-btn:hover {
+            transform: translateY(-5px) rotate(-5deg);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6);
+            color: white;
+        }
+
+        /* Bot Verification Overlay */
+        .verification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 41, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            visibility: visible;
+            transition: var(--transition);
+        }
+
+        .verification-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .verification-box {
+            background: var(--card-bg);
+            padding: 3.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .verification-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .captcha-container {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(10, 25, 41, 0.6);
+            border-radius: 20px;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .captcha-question {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            background: rgba(15, 41, 66, 0.8);
+            color: var(--light-text);
+            font-size: 1.2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .verify-btn {
+            background: var(--gradient-primary);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6);
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+            filter: blur(60px);
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .header h1 .cert-count {
+            display: inline-block;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: rgba(232, 241, 245, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Filter Buttons */
+        .filter-container {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 0 2rem;
+        }
+
+        .filter-btn {
+            background: rgba(15, 41, 66, 0.6);
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn:hover {
+            background: var(--gradient-primary);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient-primary);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Certificate Cards */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            transition: var(--transition);
+        }
+
+        .certificate-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .cert-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .cert-logo-container {
+            flex-shrink: 0;
+        }
+
+        .certificate-badge, .cert-logo {
+            height: 60px;
+            width: 60px;
+            border-radius: 10px;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            object-fit: contain;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .certificate-card:hover .certificate-badge,
+        .certificate-card:hover .cert-logo {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .cert-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cert-name, .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .cert-issuer, .card-organization {
+            font-size: 0.88rem;
+            color: rgba(232, 241, 245, 0.65);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .cert-date, .card-date {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--primary-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: rgba(37, 99, 235, 0.25);
+            border-color: var(--primary-color);
+        }
+
+        .cert-view-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .cert-view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        .cert-view-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 8, 23, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 30px;
+            max-width: 1000px;
+            width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+            padding: 2rem;
+        }
+
+        .modal-certificate-image {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-body {
+            padding: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 59, 48, 0.1);
+            border: 2px solid rgba(255, 59, 48, 0.3);
+            color: #ff3b30;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 59, 48, 0.2);
+            transform: rotate(90deg);
+            border-color: #ff3b30;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(37, 99, 235, 0.2);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+        }
+
+        .spinner {
+            border: 4px solid rgba(37, 99, 235, 0.2);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header {
+                padding: 5rem 1rem 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .certificate-card {
+                padding: 20px;
+            }
+
+            .cert-name {
+                font-size: 1.1rem;
+            }
+
+            .cert-issuer {
+                font-size: 0.85rem;
+            }
+
+            .cert-date {
+                font-size: 0.8rem;
+            }
+
+            .cert-view-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .certificate-badge, .cert-logo {
+                height: 50px;
+                width: 50px;
+            }
+
+            .skill-tag {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.7rem;
+            }
+
+            .filter-btn {
+                margin: 0.25rem;
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                border-radius: 20px;
+                max-height: 95vh;
+                padding: 1rem;
+            }
+
+            .modal-header {
+                padding: 1rem 0;
+            }
+
+            .modal-title {
+                font-size: 1.4rem;
+            }
+
+            .modal-certificate-image {
+                max-height: 65vh;
+            }
+
+            .nav-btn {
+                display: none;
+            }
+
+            .back-to-home-btn {
+                width: 50px;
+                height: 50px;
+                top: 20px;
+                left: 20px;
+                border-radius: 15px;
+            }
+
+            .filter-container {
+                display: none;
+            }
+
+            .verification-box {
+                padding: 2rem;
+                max-width: 90%;
+            }
+
+            .verification-title {
+                font-size: 1.6rem;
+            }
+
+            .captcha-container {
+                padding: 1.5rem;
+            }
+
+            .captcha-question {
+                font-size: 1.1rem;
+            }
+
+            .verify-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .certificate-card {
+                padding: 15px;
+            }
+
+            .cert-header {
+                gap: 12px;
+            }
+
+            .certificate-badge, .cert-logo {
+                height: 45px;
+                width: 45px;
+            }
+
+            .cert-name {
+                font-size: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg"></div>
+    
+    <a href="main.html" class="back-to-home-btn" title="Back to Home">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="verification-overlay" id="verificationOverlay">
+        <div class="verification-box">
+            <i class="fas fa-robot" style="font-size: 3.5rem; color: var(--primary-color); margin-bottom: 1.5rem; position: relative; z-index: 1;"></i>
+            <div class="verification-title">Verify You're Human</div>
+            <p style="color: rgba(232, 241, 245, 0.7); margin-bottom: 2rem; position: relative; z-index: 1; font-size: 1.1rem;">Please solve this simple math problem to continue</p>
+
+            <div class="captcha-container">
+                <div class="captcha-question" id="captchaQuestion"></div>
+                <input type="number" class="captcha-input" id="captchaInput" placeholder="Enter your answer">
+            </div>
+
+            <button class="verify-btn" onclick="verifyCaptcha()">
+                <i class="fas fa-check-circle"></i> Verify & Continue
+            </button>
+            <p style="color: rgba(232, 241, 245, 0.5); font-size: 0.85rem; margin-top: 1.5rem; position: relative; z-index: 1;">
+                <i class="fas fa-lock"></i> Secured by bot verification system
+            </p>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="container-fluid">
+            <div class="header">
+                <h1 data-aos="fade-up"><span class="cert-count" id="cert-count"></span> Professional Certifications</h1>
+                <p data-aos="fade-up" data-aos-delay="200">Showcasing my journey of continuous learning and professional development</p>
+            </div>
+
+            <div class="filter-container" data-aos="fade-up" data-aos-delay="400">
+                <button class="filter-btn active" onclick="filterCertificates('all')">
+                    <i class="fas fa-th-large"></i> All Certificates
+                </button>
+                <button class="filter-btn" onclick="filterCertificates('web-development')">
+                    <i class="fab fa-html5"></i> Web Development
+                </button>
+                <button class="filter-btn" onclick="filterCertificates('machine-learning')">
+                    <i class="fas fa-brain"></i> Machine Learning
+                </button>
+                <button class="filter-btn" onclick="filterCertificates('databases')">
+                    <i class="fas fa-database"></i> Databases
+                </button>
+                <button class="filter-btn" onclick="filterCertificates('software-development')">
+                    <i class="fas fa-code"></i> Software Development
+                </button>
+                <button class="filter-btn" onclick="filterCertificates('others')">
+                    <i class="fas fa-certificate"></i> Others
+                </button>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="font-size: 1.2rem; color: var(--light-text); font-weight: 600;">Loading certificates...</p>
+            </div>
+
+            <div class="certificates-grid" id="certificatesGrid"></div>
+        </div>
+    </div>
+
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="nav-btn prev-btn" onclick="navigateCertificate(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" onclick="navigateCertificate(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-header">
+                <div id="modalTitle" class="modal-title"></div>
+            </div>
+            <div class="modal-body">
+                <div id="modalImageContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        const certificates = [
+            { id: 1, title: "C Programming Certificate", image: "c.png", ribbon: "C Programming", category: "others", description: "Comprehensive course covering C programming fundamentals, data structures, and memory management.", issued: "February 2025", organization: "ScholarHat", skills: ["C Programming", "Data Structures", "Memory Management", "Algorithms", "more..."], icon: "fas fa-code" },
+            { id: 2, title: "C++ Programming Certificate", image: "cpp.png", ribbon: "C++ Programming", category: "others", description: "Advanced C++ programming concepts including OOP, templates, and STL implementation.", issued: "February 2025", organization: "ScholarHat", skills: ["C++", "Object-Oriented Programming", "Templates", "STL", "more..."], icon: "fas fa-code" },
+            { id: 3, title: "Python Mastery Certificate", image: "python.jpg", ribbon: "Python Mastery", category: "machine-learning", description: "Complete Python programming course covering basics to advanced topics and data science libraries.", issued: "November 2024", organization: "Scalar School of Technology", skills: ["Python", "Data Science", "NumPy", "Pandas", "Matplotlib", "more..."], icon: "fab fa-python" },
+            { id: 4, title: "SQL Mastery Certificate", image: "sql.jpg", ribbon: "SQL Mastery", category: "databases", description: "Advanced SQL course covering complex queries, database design, and optimization techniques.", issued: "November 2024", organization: "Scalar School of Technology", skills: ["SQL", "Database Design", "Query Optimization", "Data Analysis", "more..."], icon: "fas fa-database" },
+            { id: 5, title: "CSS HackerRank Certificate", image: "css.jpg", ribbon: "CSS HackerRank", category: "web-development", description: "CSS styling and responsive design certification from HackerRank platform.", issued: "March 2025", organization: "HackerRank", skills: ["CSS", "Responsive Design", "Flexbox", "Grid Layout", "more..."], icon: "fab fa-css3-alt" },
+            { id: 6, title: "React JS Bootcamp Certificate", image: "react.jpg", ribbon: "React JS Bootcamp", category: "web-development", description: "Intensive React.js bootcamp covering components, hooks, state management, and modern React patterns.", issued: "February 2025", organization: "LetsUpgrade", skills: ["React.js", "JSX", "Hooks", "State Management", "Component Architecture", "more..."], icon: "fab fa-react" },
+            { id: 7, title: "React JS Projects Bootcamp", image: "reactclone.jpg", ribbon: "React JS Projects", category: "web-development", description: "Hands-on React projects bootcamp including building real-world applications and clones.", issued: "February 2025", organization: "LetsUpgrade", skills: ["React Projects", "Redux", "API Integration", "Performance Optimization", "more..."], icon: "fab fa-react" },
+            { id: 8, title: "Git and GitHub Certificate", image: "git.jpg", ribbon: "Git and GitHub", category: "others", description: "Version control mastery with Git and GitHub, including collaboration workflows and best practices.", issued: "March 2025", organization: "LetsUpgrade", skills: ["Git", "GitHub", "Version Control", "Collaboration", "Branching", "more..."], icon: "fab fa-git-alt" },
+            { id: 9, title: "ChatGPT Bootcamp Certificate", image: "chatgpt.jpg", ribbon: "ChatGPT Bootcamp", category: "machine-learning", description: "Comprehensive course on AI prompt engineering and effective ChatGPT utilization for productivity.", issued: "February 2025", organization: "LetsUpgrade", skills: ["AI Prompting", "ChatGPT", "Prompt Engineering", "AI Tools", "more..."], icon: "fas fa-robot" },
+            { id: 10, title: "Web Development Certificate", image: "web.jpg", ribbon: "Web Development", category: "web-development", description: "Full-stack web development course covering HTML, CSS, JavaScript, and modern frameworks.", issued: "November 2024", organization: "Udemy", skills: ["HTML", "CSS", "JavaScript", "Full-Stack", "Responsive Design", "more..."], icon: "fas fa-globe" },
+            { id: 11, title: "Django Certificate", image: "django.png", ribbon: "Django", category: "web-development", description: "Django web framework certification covering MVT architecture, ORM, and web application development.", issued: "2024", organization: "GeeksforGeeks", skills: ["Django", "Python Web Framework", "ORM", "MVT Architecture", "Web APIs", "more..."], icon: "fab fa-python" },
+            { id: 12, title: "Web Scraping with Python", image: "webscrap.jpg", ribbon: "Web Scraping", category: "machine-learning", description: "Advanced web scraping techniques using Python, BeautifulSoup, Selenium, and data extraction methods.", issued: "October 2024", organization: "Great Learning Academy", skills: ["Web Scraping", "BeautifulSoup", "Selenium", "Data Extraction", "Python", "more..."], icon: "fas fa-spider" },
+            { id: 13, title: "Prompting Certificate", image: "prompt.png", ribbon: "Prompting", category: "machine-learning", description: "Advanced AI prompt engineering certification covering techniques for effective AI communication.", issued: "October 2024", organization: "SimpliLearn and SkillUp", skills: ["Prompt Engineering", "AI Communication", "ChatGPT", "AI Optimization", "more..."], icon: "fas fa-brain" },
+            { id: 14, title: "New Product Development", image: "npd.jpg", ribbon: "New Product Development", category: "others", description: "Product development lifecycle, market research, and innovation management certification.", issued: "March 2025", organization: "Industrial Academia Community", skills: ["Product Development", "Market Research", "Innovation", "Project Management", "more..."], icon: "fas fa-lightbulb" },
+            { id: 15, title: "Digital Business Skills", image: "dbs.jpg", ribbon: "Digital Business Skills", category: "others", description: "Digital transformation, online business strategies, and e-commerce fundamentals.", issued: "September 2024", organization: "HP Life", skills: ["Digital Marketing", "E-commerce", "Business Strategy", "Digital Transformation", "more..."], icon: "fas fa-chart-line" },
+            { id: 16, title: "Inventory Management", image: "im.jpg", ribbon: "Inventory Management", category: "others", description: "Supply chain management, inventory optimization, and logistics planning certification.", issued: "September 2024", organization: "HP Life", skills: ["Inventory Management", "Supply Chain", "Logistics", "Optimization", "more..."], icon: "fas fa-boxes" },
+            { id: 17, title: "C++ and Java Basics", image: "java.png", ribbon: "C++ and Java Basics", category: "others", description: "Fundamental programming concepts in both C++ and Java with practical implementations.", issued: "August 2024", organization: "Coding School", skills: ["C++", "Java", "Object-Oriented Programming", "Programming Fundamentals", "more..."], icon: "fab fa-java" },
+            { id: 18, title: "SQL With AI Workshop", image: "sqlwithaicert.png", ribbon: "SQL with AI", category: "databases", description: "Modern SQL techniques enhanced with AI tools for advanced data analysis and automation.", issued: "June 2025", organization: "AI for Techies", skills: ["SQL", "AI Integration", "Data Analysis", "Automation", "Advanced Queries", "more..."], icon: "fas fa-database" },
+            { id: 19, title: "PhonePay data analysis using powerBI", image: "pbi.png", ribbon: "PowerBI", category: "machine-learning", description: "Business intelligence and data visualization using PowerBI with real-world PhonePay data analysis.", issued: "June 2025", organization: "WS Cube Tech", skills: ["PowerBI", "Data Visualization", "Business Intelligence", "Data Analysis", "DAX", "more..."], icon: "fas fa-chart-bar" },
+            { id: 20, title: "EXCEL using AI Workshop", image: "excel.png", ribbon: "Excel with AI", category: "others", description: "Advanced Excel techniques enhanced with AI tools for data analysis and automation.", issued: "June 2025", organization: "Office Master", skills: ["Excel", "AI Integration", "Data Analysis", "Automation", "Advanced Functions", "more..."], icon: "fas fa-file-excel" },
+            { id: 21, title: "Pandas for Machine Learning", image: "pandas-cert.jpeg", ribbon: "Pandas for ML", category: "machine-learning", description: "Data manipulation and analysis using Pandas library for machine learning applications.", issued: "June 2025", organization: "Intellipaat", skills: ["Pandas", "Data Manipulation", "Machine Learning", "Data Preprocessing", "Python", "more..."], icon: "fab fa-python" },
+            { id: 22, title: "Generative AI Essentials", image: "google-cert.png", ribbon: "GenAI", category: "machine-learning", description: "Generative AI essentials by Google for Machine Learning", issued: "June 2025", organization: "Google", skills: ["AI vs GenAI", "ML Basics", "LLMs Intro", "Prompting", "Text Gen", "more..."], icon: "fab fa-google" },
+            { id: 23, title: "LLM Essentials", image: "llm.png", ribbon: "Large Language Models", category: "machine-learning", description: "LLM Essentials by Google for Machine Learning", issued: "June 2025", organization: "Google", skills: ["LLM Fundamentals", "Transformer Architecture", "Fine‑Tuning & Alignment", "Prompt Engineering", "Responsible AI for LLMs", "Text Generation & Evaluation"], icon: "fas fa-brain" },
+            { id: 24, title: "Python Developer Virtual Internship", image: "delloite-intern.png", ribbon: "Python Internship", category: "software-development", description: "Python Developer Virtual Internship by Deloitte", issued: "June 2025", organization: "Deloitte", skills: ["Python Programming", "Data Structures & Algorithms", "Communication", "Project Proposal Letter Design"], icon: "fab fa-python" },
+            { id: 25, title: "Power BI for Business Analysis", image: "power-bi.jpeg", ribbon: "Power BI", category: "machine-learning", description: "Mastering Power BI for bussiness and data analysis", issued: "June 2025", organization: "Skill Nation", skills: ["Power BI", "Data Analysis", "Dash Board and Bussiness Analysis"], icon: "fab fa-chart-bar" },
+            { id: 26, title: "MongoDB", image: "mongodb.jpeg", ribbon: "MongoDB", category: "databases", description: "MongoDB for nosql backend developement", issued: "June 2025", organization: "LetsUpgrade", skills: ["MongoDB", "Backend Development"], icon: "fab fa-chart-bar" }
+        ];
+
+        let count_cert = certificates.length;
+        document.getElementById("cert-count").innerHTML = count_cert;
+        let currentCertificates = [...certificates];
+        let currentModalIndex = 0;
+        let captchaAnswer = 0;
+
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 20) + 1;
+            const num2 = Math.floor(Math.random() * 20) + 1;
+            const operators = ['+', '-', '*'];
+            const operator = operators[Math.floor(Math.random() * operators.length)];
+            let answer, question;
+
+            switch (operator) {
+                case '+':
+                    answer = num1 + num2;
+                    question = `${num1} + ${num2} = ?`;
+                    break;
+                case '-':
+                    answer = Math.abs(num1 - num2);
+                    question = `${Math.max(num1, num2)} - ${Math.min(num1, num2)} = ?`;
+                    break;
+                case '*':
+                    const smallNum1 = Math.floor(Math.random() * 10) + 1;
+                    const smallNum2 = Math.floor(Math.random() * 10) + 1;
+                    answer = smallNum1 * smallNum2;
+                    question = `${smallNum1} × ${smallNum2} = ?`;
+                    break;
+            }
+
+            document.getElementById('captchaQuestion').textContent = question;
+            captchaAnswer = answer;
+        }
+
+        function verifyCaptcha() {
+            const userAnswer = parseInt(document.getElementById('captchaInput').value);
+            if (userAnswer === captchaAnswer) {
+                document.getElementById('verificationOverlay').classList.add('hidden');
+                setTimeout(() => {
+                    document.getElementById('mainContent').classList.add('visible');
+                    initializePage();
+                }, 500);
+            } else {
+                const captchaContainer = document.querySelector('.captcha-container');
+                captchaContainer.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    captchaContainer.style.animation = '';
+                    generateCaptcha();
+                    document.getElementById('captchaInput').value = '';
+                }, 500);
+            }
+        }
+
+        function initializePage() {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                renderCertificates(certificates);
+            }, 2000);
+        }
+
+        function filterCertificates(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            const matchedBtn = Array.from(buttons).find(btn => {
+                const onclick = btn.getAttribute('onclick');
+                return onclick && onclick.includes(`'${category}'`);
+            });
+            if (matchedBtn) matchedBtn.classList.add('active');
+            
+            const filteredCerts = category === 'all' ? certificates : certificates.filter(cert => cert.category === category);
+            currentCertificates = filteredCerts;
+            
+            const grid = document.getElementById('certificatesGrid');
+            grid.style.opacity = '0.5';
+            setTimeout(() => {
+                renderCertificates(filteredCerts);
+                grid.style.opacity = '1';
+            }, 200);
+        }
+
+        function renderCertificates(certs) {
+            const grid = document.getElementById('certificatesGrid');
+            grid.innerHTML = '';
+            
+            certs.forEach((cert, index) => {
+                const card = document.createElement('div');
+                card.className = 'certificate-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', Math.min(index * 50, 500).toString());
+                
+                const orgLogos = {
+                    'ScholarHat': 'scholarhat-logo.png',
+                    'Scalar School of Technology': 'scalar-logo.png',
+                    'HackerRank': 'hackerrank-logo.png',
+                    'LetsUpgrade': 'letsupgrade-logo.png',
+                    'Udemy': 'udemy-logo.png',
+                    'GeeksforGeeks': 'gfg-logo.png',
+                    'Great Learning Academy': 'greatlearning-logo.png',
+                    'SimpliLearn and SkillUp': 'simplilearn-logo.png',
+                    'Industrial Academia Community': 'iac-logo.png',
+                    'HP Life': 'hp-logo.png',
+                    'Coding School': 'codingschool-logo.png',
+                    'AI for Techies': 'ai4techies-logo.png',
+                    'WS Cube Tech': 'wscube-logo.png',
+                    'Office Master': 'officemaster-logo.png',
+                    'Intellipaat': 'intellipaat-logo.png',
+                    'Google': 'google.png',
+                    'Deloitte': 'delloite.jpeg',
+                    'Skill Nation': 'skillnation-logo.png'
+                };
+                
+                const logoSrc = orgLogos[cert.organization] || cert.image;
+                
+                card.innerHTML = `
+                    <div class="cert-header">
+                        <div class="cert-logo-container">
+                            <img src="${logoSrc}" class="cert-logo" alt="${cert.organization}" 
+                                 onerror="this.src='${cert.image}'">
+                        </div>
+                        <div class="cert-info">
+                            <h3 class="cert-name">${cert.title}</h3>
+                            <p class="cert-issuer">Issued by: ${cert.organization}</p>
+                            <p class="cert-date"><i class="fas fa-calendar"></i> ${cert.issued}</p>
+                        </div>
+                    </div>
+                    <div class="skills-container">
+                        ${cert.skills.slice(0, 3).map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                    <button class="cert-view-btn" onclick="openModal(${cert.id})">
+                        <i class="fas fa-eye"></i>
+                        View Certificate
+                    </button>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        }
+
+        function openModal(certId) {
+            const cert = certificates.find(c => c.id === certId);
+            currentModalIndex = currentCertificates.findIndex(c => c.id === certId);
+            
+            document.getElementById('modalTitle').textContent = cert.title;
+            
+            const modalImageContainer = document.getElementById('modalImageContainer');
+            modalImageContainer.innerHTML = `
+                <img src="${cert.image}" alt="${cert.title}" class="modal-certificate-image" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div style="display: none; align-items: center; justify-content: center; height: 200px; color: var(--primary-color); font-size: 5rem;">
+                    <i class="${cert.icon}"></i>
+                </div>
+            `;
+            
+            document.getElementById('fullscreenModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('fullscreenModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateCertificate(direction) {
+            currentModalIndex += direction;
+            if (currentModalIndex < 0) currentModalIndex = currentCertificates.length - 1;
+            else if (currentModalIndex >= currentCertificates.length) currentModalIndex = 0;
+            
+            const cert = currentCertificates[currentModalIndex];
+            openModal(cert.id);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('fullscreenModal').classList.contains('active')) {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateCertificate(-1);
+                if (e.key === 'ArrowRight') navigateCertificate(1);
+            }
+        });
+
+        document.getElementById('captchaInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') verifyCaptcha();
+        });
+
+        document.getElementById('fullscreenModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('fullscreenModal')) closeModal();
+        });
+
+        document.addEventListener('DOMContentLoaded', generateCaptcha);
+
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey && e.key.toLowerCase() === 'u') e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+            if (e.key === "F12") e.preventDefault();
+        });
+    </script>
+</body>
+</html>

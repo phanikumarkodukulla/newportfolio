@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+.split-intro-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+.split-intro-container[style*="display: none"] {
+    pointer-events: none;
+}
+
+/* Split halves */
+.split-half {
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.top-half {
+    top: 0;
+    background: #0f172a;
+}
+
+.bottom-half {
+    bottom: 0;
+    background: #f5f5f5;
+}
+
+/* Content layer */
+.half-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.half-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+    font-weight: 700;
+    padding: 40px 80px;
+}
+
+.phani-text {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.kumar-text {
+    color: #0f172a;
+    text-shadow: 0 0 20px rgba(232, 241, 245, 0.3);
+}
+
+.top-half::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bottom-half::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .half-text {
+        font-size: 180px;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 768px) {
+    .half-text {
+        font-size: 140px;
+        letter-spacing: 2px;
+        padding: 30px 50px;
+    }
+
+    .split-half {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .half-text {
+        font-size: 100px;
+        letter-spacing: 1.5px;
+        padding: 20px 30px;
+    }
+
+    .split-half {
+        height: 50vh;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .split-half {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Portfolio Text */
+.portfolio-text-wrapper {
+    position: fixed;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    width: 600px;
+    height: 100vh;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 8px rgba(127, 1, 31, 0.4));
+}
+
+.portfolio-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 90px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    color: #2563eb;
+    text-shadow: 0 0 15px rgba(37, 99, 235, 0.6);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+    line-height: 1.2;
+}
+
+/* Responsive font sizes for portfolio text */
+@media (max-width: 1024px) {
+    .portfolio-text {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-text {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-text {
+        font-size: 35px;
+    }
+}
+
+.portfolio-curved-text {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    fill: none;
+    stroke: #7F011F;
+    stroke-width: 2;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+}

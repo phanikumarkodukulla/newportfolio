@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Education Journey | K.V.K.Phani Kumar</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="my-profile.png">
+    <style>
+        @font-face {
+            font-family: 'ProductSans';
+            src: url('ProductSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #6366F1;
+            --accent-color: #3B82F6;
+            --dark-bg: #0A1929;
+            --darker-bg: #020817;
+            --card-bg: #0F2942;
+            --light-text: #E8F1F5;
+            --dark-text: #1A202C;
+            --success-color: #10b981;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ProductSans', 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--darker-bg);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: var(--dark-text);
+            transform: translateX(-5px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .timeline-overview {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--card-bg);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+        }
+
+        .timeline-item-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Education Timeline */
+        .education-timeline {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 60px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: rgba(37, 99, 235, 0.2);
+            transform-origin: top;
+            transform: translateX(-50%);
+        }
+
+        .timeline-line-progress {
+            position: absolute;
+            left: 60px;
+            top: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            transition: height 0.3s ease;
+            transform-origin: top;
+            transform: translateX(-50%);
+        }
+
+        .education-item {
+            position: relative;
+            margin-bottom: 100px;
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            padding-left: 140px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .education-item.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 40px;
+            top: 30px;
+            transform: translate(-50%, 0);
+            width: 40px;
+            height: 40px;
+            background:white;
+            border: 4px solid var(--dark-bg);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3);
+        }
+
+        .timeline-marker i {
+            display: none;
+        }
+
+        .education-content {
+            flex: 1;
+            width: 100%;
+        }
+
+        .education-card-detail {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 40px;
+            position: relative;
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header-detail {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .institution-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .institution-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .degree-info h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .institution-name {
+            font-size: 1.1rem;
+            color: rgba(245, 245, 245, 0.8);
+            font-weight: 500;
+        }
+
+        .year-range {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .year-divider {
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .status-badge-detail {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 2px solid;
+        }
+
+        .status-badge-detail.completed {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success-color);
+            border-color: var(--success-color);
+        }
+
+        .status-badge-detail.in-progress {
+            background: rgba(37, 99, 235, 0.15);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .detail-box {
+            background: rgba(37, 99, 235, 0.08);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .achievements {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .achievement-title {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievement-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .achievement-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--success-color);
+        }
+
+        .description {
+            margin-top: 20px;
+            color: rgba(245, 245, 245, 0.7);
+            line-height: 1.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .timeline-line,
+            .timeline-line-progress {
+                left: 30px;
+            }
+
+            .education-item {
+                padding-left: 80px;
+            }
+
+            .timeline-marker {
+                left: 30px;
+                width: 16px;
+                height: 16px;
+                border: 3px solid var(--dark-bg);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .education-card-detail {
+                padding: 30px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .timeline-overview {
+                flex-direction: column;
+            }
+
+            .timeline-line,
+            .timeline-line-progress {
+                left: 30px;
+            }
+
+            .education-item {
+                padding-left: 80px;
+            }
+
+            .timeline-marker {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .institution-logo {
+                width: 60px;
+                height: 60px;
+            }
+
+            .degree-info h2 {
+                font-size: 1.3rem;
+            }
+
+            .institution-name {
+                font-size: 0.95rem;
+            }
+
+            .education-card-detail {
+                padding: 20px;
+            }
+
+            .education-item {
+                padding-left: 60px;
+            }
+
+            .timeline-line,
+            .timeline-line-progress {
+                left: 20px;
+            }
+
+            .timeline-marker {
+                left: 20px;
+                width: 16px;
+                height: 16px;
+                border: 3px solid var(--dark-bg);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-bg);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer p {
+            color: rgba(245, 245, 245, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="main.html" class="logo">K.V.K.Phani Kumar</a>
+            <a href="main.html#education" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Portfolio
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">My Education Journey</h1>
+            <p class="hero-subtitle">A comprehensive overview of my academic achievements and learning path</p>
+            <div class="timeline-overview">
+                <div class="timeline-item-mini">
+                    <i class="fas fa-calendar"></i>
+                    <span>2019 - Present</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Timeline -->
+    <section class="education-timeline">
+        <div class="timeline-line"></div>
+        <div class="timeline-line-progress"></div>
+
+        <!-- B.Tech - In Progress -->
+        <div class="education-item">
+            <div class="education-content">
+                <div class="education-card-detail">
+                    <div class="card-header-detail">
+                        <div class="institution-logo">
+                            <img src="anits.jpeg" alt="ANITS" onerror="this.src='https://via.placeholder.com/80?text=ANITS'">
+                        </div>
+                        <div class="degree-info">
+                            <h2>Bachelor of Technology</h2>
+                            <p class="institution-name">Anil Neerukonda Institute of Technology and Sciences</p>
+                        </div>
+                    </div>
+
+                    <div class="year-range">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>2025</span>
+                        <div class="year-divider"></div>
+                        <span>Present</span>
+                    </div>
+
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Visakhapatnam, Andhra Pradesh, India</span>
+                    </div>
+
+                    <div class="status-badge-detail in-progress">
+                        <i class="fas fa-spinner fa-pulse"></i>
+                        <span>Currently Pursuing</span>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-box">
+                            <div class="detail-label">Specialization</div>
+                            <div class="detail-value">Computer Science</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Duration</div>
+                            <div class="detail-value">4 Years</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Current Year</div>
+                            <div class="detail-value">2nd Year</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Expected Completion</div>
+                            <div class="detail-value">2028</div>
+                        </div>
+                    </div>
+
+                    <div class="description">
+                        Currently pursuing B.Tech with a focus on advanced computer science concepts, software engineering, 
+                        data structures, algorithms, and modern development practices. Actively engaged in practical projects 
+                        and industry-relevant coursework.
+                    </div>
+
+                    <div class="achievements">
+                        <div class="achievement-title">
+                            <i class="fas fa-trophy"></i>
+                            Focus Areas
+                        </div>
+                        <div class="achievement-list">
+                            <span class="achievement-tag">Web Development</span>
+                            <span class="achievement-tag">Data Science</span>
+                            <span class="achievement-tag">Cloud Computing</span>
+                            <span class="achievement-tag">Software Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-marker">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+        </div>
+
+        <!-- Diploma - Completed -->
+        <div class="education-item">
+            <div class="education-content">
+                <div class="education-card-detail">
+                    <div class="card-header-detail">
+                        <div class="institution-logo">
+                            <img src="sgpv.jpeg" alt="Sai Ganapathi Polytechnic">
+                        </div>
+                        <div class="degree-info">
+                            <h2>Diploma in Computer Engineering</h2>
+                            <p class="institution-name">Sai Ganapathi Shift Polytechnic</p>
+                        </div>
+                    </div>
+
+                    <div class="year-range">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>2022</span>
+                        <div class="year-divider"></div>
+                        <span>2025</span>
+                    </div>
+
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Visakhapatnam, Andhra Pradesh, India</span>
+                    </div>
+
+                    <div class="status-badge-detail completed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Successfully Completed</span>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-box">
+                            <div class="detail-label">Overall Percentage</div>
+                            <div class="detail-value">96.5%</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Duration</div>
+                            <div class="detail-value">3 Years</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">CGPA</div>
+                            <div class="detail-value">9.6 / 10</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Grade</div>
+                            <div class="detail-value">Distinction</div>
+                        </div>
+                    </div>
+
+                    <div class="description">
+                        Completed a comprehensive Diploma in Computer Engineering with exceptional academic performance. 
+                        Gained strong foundation in programming, database management, web technologies, networking, 
+                        and software development. Completed multiple practical projects and industry-relevant assignments.
+                    </div>
+
+                    <div class="achievements">
+                        <div class="achievement-title">
+                            <i class="fas fa-trophy"></i>
+                            Key Achievements
+                        </div>
+                        <div class="achievement-list">
+                            <span class="achievement-tag">95.6% Overall Excellence</span>
+                            <span class="achievement-tag">Top 5% in Batch</span>
+                            <span class="achievement-tag">Multiple Projects</span>
+                            <span class="achievement-tag">Technical Skills Award</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-marker">
+                <i class="fas fa-certificate"></i>
+            </div>
+        </div>
+
+        <!-- Secondary Education - Completed -->
+        <div class="education-item">
+            <div class="education-content">
+                <div class="education-card-detail">
+                    <div class="card-header-detail">
+                        <div class="institution-logo">
+                            <img src="school.jpeg" alt="Gurukulam">
+                        </div>
+                        <div class="degree-info">
+                            <h2>Secondary Education (SSC)</h2>
+                            <p class="institution-name">Sri Kanchi Kamakoti Integrated Veda Paatashaala (Gurukulam)</p>
+                        </div>
+                    </div>
+
+                    <div class="year-range">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>2019</span>
+                        <div class="year-divider"></div>
+                        <span>2022</span>
+                    </div>
+
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Samalakot, Andhra Pradesh, India</span>
+                    </div>
+
+                    <div class="status-badge-detail completed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Successfully Completed</span>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-box">
+                            <div class="detail-label">Percentage</div>
+                            <div class="detail-value">88.5%</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Duration</div>
+                            <div class="detail-value">3 Years</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">GPA</div>
+                            <div class="detail-value">8.85 / 10</div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-label">Grade</div>
+                            <div class="detail-value">First Class</div>
+                        </div>
+                    </div>
+
+                    <div class="description">
+                        Completed secondary education at a distinguished institution combining traditional Vedic education 
+                        with modern academics. Developed strong analytical thinking, disciplined study habits, and 
+                        foundational knowledge in mathematics, sciences, and languages.
+                    </div>
+
+                    <div class="achievements">
+                        <div class="achievement-title">
+                            <i class="fas fa-trophy"></i>
+                            Key Achievements
+                        </div>
+                        <div class="achievement-list">
+                            <span class="achievement-tag">88.5% Percentage</span>
+                            <span class="achievement-tag">First Class Distinction</span>
+                            <span class="achievement-tag">Cultural Excellence</span>
+                            <span class="achievement-tag">Academic Awards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-marker">
+                <i class="fas fa-school"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 K.V.K.Phani Kumar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation for Education Items and Timeline
+        const educationItems = document.querySelectorAll('.education-item');
+        const timelineProgress = document.querySelector('.timeline-line-progress');
+        const timeline = document.querySelector('.education-timeline');
+
+        function animateOnScroll() {
+            const timelineTop = timeline.offsetTop;
+            const timelineHeight = timeline.offsetHeight;
+            const scrollY = window.scrollY + window.innerHeight;
+            
+            // Calculate timeline progress
+            const progressStart = timelineTop;
+            const progressEnd = timelineTop + timelineHeight;
+            const progress = Math.min(Math.max((scrollY - progressStart) / (progressEnd - progressStart), 0), 1);
+            
+            // Update timeline progress height
+            timelineProgress.style.height = `${progress * 100}%`;
+
+            // Animate education items
+            educationItems.forEach((item, index) => {
+                const itemTop = item.offsetTop + timeline.offsetTop;
+                const itemHeight = item.offsetHeight;
+                const triggerPoint = itemTop - window.innerHeight + 200;
+
+                if (window.scrollY > triggerPoint) {
+                    setTimeout(() => {
+                        item.classList.add('animate-in');
+                    }, index * 150); // Stagger animation
+                }
+            });
+        }
+
+        // Initial check
+        animateOnScroll();
+
+        // Listen to scroll events
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(animateOnScroll);
+        });
+
+        // Trigger animation on page load
+        window.addEventListener('load', () => {
+            setTimeout(animateOnScroll, 100);
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+

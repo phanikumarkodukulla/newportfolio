@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Publications - Python Packages & Books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="my-profile.jpg">
+    
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #6366F1;
+            --accent-color: #3B82F6;
+            --dark-bg: #0A1929;
+            --darker-bg: #020817;
+            --navy-blue: #1E3A5F;
+            --light-navy: #2C5282;
+            --light-text: #E8F1F5;
+            --dark-text: #1A202C;
+            --card-bg: #0F2942;
+            --card-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #2563EB 0%, #6366F1 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ProductSans', 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--darker-bg);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 100px 40px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--light-text);
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-text);
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+      
+
+        /* Packages Grid */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .package-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .package-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .package-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .package-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(123, 104, 238, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-icon img {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+        }
+
+        .package-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .package-card:hover .package-icon::before {
+            opacity: 0.2;
+        }
+
+        .package-info h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .package-type {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .package-description {
+            color: var(--light-text);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .package-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .package-tag {
+            padding: 6px 14px;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .package-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .package-doc-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .package-doc-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        .install-cmd {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(15, 41, 66, 0.8);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .install-cmd i {
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 40px 40px 20px;
+            margin-top: 100px;
+            border-top: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--light-text);
+            opacity: 0.7;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .book-showcase {
+                flex-direction: column;
+                padding: 40px 30px;
+                gap: 40px;
+            }
+
+            .book-3d-container {
+                flex: 0 0 auto;
+            }
+
+            .book-3d {
+                width: 220px;
+                height: 300px;
+            }
+
+            .book-title {
+                font-size: 2rem;
+            }
+
+            .book-features {
+                grid-template-columns: 1fr;
+            }
+
+            .book-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            .back-btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .hero-section {
+                padding: 60px 20px 40px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .stats-row {
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 40px 20px;
+            }
+
+            .book-showcase {
+                padding: 30px 20px;
+            }
+
+            .package-card {
+                padding: 30px 20px;
+            }
+
+            .package-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .install-cmd {
+                font-size: 0.8rem;
+                padding: 14px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-newspaper"></i> My Publications
+            </div>
+          
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Publications & Open Source</h1>
+            <p class="hero-subtitle">Python packages, books, and tools I've created for the developer community</p>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="stat-number">3+</span>
+                    <span class="stat-label">Packages</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Books</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">5K+</span>
+                    <span class="stat-label">Downloads</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Book Section -->
+     <style>
+          .python-showcase-wrapper-unique {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .python-book-header-unique {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .python-book-header-unique i {
+            margin-right: 10px;
+        }
+
+        .python-showcase-card-unique {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            transition: all 0.3s ease;
+        }
+
+        .python-showcase-card-unique:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .python-book-visual-section-unique {
+            flex: 0 0 300px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(0, 184, 255, 0.1));
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .python-book-visual-section-unique::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="2" fill="rgba(0,255,157,0.1)"/><circle cx="10" cy="10" r="1" fill="rgba(0,184,255,0.1)"/><circle cx="40" cy="15" r="1.5" fill="rgba(0,255,157,0.08)"/><circle cx="15" cy="40" r="1" fill="rgba(0,184,255,0.08)"/></svg>');
+            animation: python-float-animation-unique 20s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes python-float-animation-unique {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        .python-book-3d-container-unique {
+            width: 180px;
+            height: 240px;
+            position: relative;
+            transform: perspective(800px) rotateY(-15deg);
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        .python-book-3d-container-unique:hover {
+            transform: perspective(800px) rotateY(-8deg) scale(1.05);
+        }
+
+        .python-book-cover-mockup-unique {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 
+                0 20px 30px rgba(0, 0, 0, 0.3),
+                15px 0 30px rgba(37, 99, 235, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--darker-bg);
+        }
+
+        .python-book-cover-mockup-unique::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -15px;
+            width: 15px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4));
+            border-radius: 0 8px 8px 0;
+        }
+
+        .python-book-cover-content-unique {
+            z-index: 3;
+            position: relative;
+        }
+
+        .python-logo-icon-unique {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .python-book-cover-title-unique {
+            font-size: 1.3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .python-book-content-section-unique {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .python-book-main-title-unique {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .python-book-description-text-unique {
+            color: rgba(245, 245, 245, 0.85);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .python-book-features-grid-unique {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .python-feature-item-unique {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--light-text);
+            padding: 8px 0;
+        }
+
+        .python-feature-item-unique i {
+            color: var(--primary-color);
+            margin-right: 8px;
+            width: 16px;
+            font-size: 1rem;
+        }
+
+        .python-book-stats-container-unique {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .python-book-stat-item-unique {
+            text-align: center;
+        }
+
+        .python-stat-number-unique {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .python-stat-label-unique {
+            color: rgba(245, 245, 245, 0.7);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .python-showcase-card-unique {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .python-book-visual-section-unique {
+                flex: none;
+                width: 100%;
+                padding: 30px;
+            }
+
+            .python-book-3d-container-unique {
+                transform: none;
+                width: 160px;
+                height: 210px;
+            }
+
+            .python-book-content-section-unique {
+                padding: 30px 25px;
+            }
+
+            .python-book-main-title-unique {
+                font-size: 1.7rem;
+            }
+
+            .python-book-features-grid-unique {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .python-book-stats-container-unique {
+                gap: 20px;
+            }
+        }
+    </style>
+
+    <div class="python-showcase-wrapper-unique">
+        <h2 class="section-title">
+            <i class="fas fa-book"></i>Books I Published
+        </h2>
+        
+        <div class="python-showcase-card-unique">
+            <div class="python-book-visual-section-unique">
+                <div class="python-book-3d-container-unique">
+                    <div class="python-book-cover-mockup-unique">
+                        <div class="python-book-cover-content-unique">
+                            <i class="fab fa-python python-logo-icon-unique"></i>
+                            <div class="python-book-cover-title-unique">The Alphabet<br>of Python</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="python-book-content-section-unique">
+                <h1 class="python-book-main-title-unique">The Alphabet of Python</h1>
+                
+                <p class="python-book-description-text-unique">
+                    A comprehensive guide for beginners to master Python programming from scratch. 
+                    Learn through practical projects and real-world applications with step-by-step guidance.
+                </p>
+                
+                <div class="python-book-features-grid-unique">
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-code"></i>
+                        Complete Python Coverage
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-project-diagram"></i>
+                        25+ Real Projects
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-robot"></i>
+                        Jarvis AI Assistant
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-graduation-cap"></i>
+                        Beginner Friendly
+                    </div>
+                </div>
+                
+                <div class="python-book-stats-container-unique">
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">300+</span>
+                        <span class="python-stat-label-unique">Pages</span>
+                    </div>
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">25+</span>
+                        <span class="python-stat-label-unique">Projects</span>
+                    </div>
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">15</span>
+                        <span class="python-stat-label-unique">Chapters</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></br></br>
+
+    <!-- Second Book: The Essentials Of Prompting -->
+    <div class="python-showcase-wrapper-unique">
+        <div class="python-showcase-card-unique">
+            <div class="python-book-visual-section-unique">
+                <div class="python-book-3d-container-unique">
+                    <div class="python-book-cover-mockup-unique">
+                        <div class="python-book-cover-content-unique">
+                            <i class="fas fa-robot python-logo-icon-unique"></i>
+                            <div class="python-book-cover-title-unique">The Essentials<br>Of Prompting</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="python-book-content-section-unique">
+                <h1 class="python-book-main-title-unique">The Essentials Of Prompting</h1>
+                
+                <p class="python-book-description-text-unique">
+                    Master the art of AI communication with this comprehensive guide to prompt engineering. 
+                    Learn the language of AI and discover how to craft effective prompts for optimal results 
+                    across various AI models and applications.
+                </p>
+                
+                <div class="python-book-features-grid-unique">
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-brain"></i>
+                        AI Communication Mastery
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-lightbulb"></i>
+                        Core Prompting Topics
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-comments"></i>
+                        Language of AI
+                    </div>
+                    <div class="python-feature-item-unique">
+                        <i class="fas fa-check-circle"></i>
+                        Essential Techniques
+                    </div>
+                </div>
+                
+                <div class="python-book-stats-container-unique">
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">100+</span>
+                        <span class="python-stat-label-unique">Pages</span>
+                    </div>
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">5</span>
+                        <span class="python-stat-label-unique">Chapters</span>
+                    </div>
+                    <div class="python-book-stat-item-unique">
+                        <span class="python-stat-number-unique">AI</span>
+                        <span class="python-stat-label-unique">Prompting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></br></br>
+
+        <!-- Python Packages Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fab fa-python"></i>
+                    Python Packages
+                </h2>
+                <p class="section-description">
+                    Open-source Python libraries published on PyPI for the developer community
+                </p>
+            </div>
+
+            <div class="packages-grid">
+                
+                <!-- Package 1: code-complexity-analyzer -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-icon">
+                            <img src="c-c-a.png" alt="Code Complexity Analyzer">
+                        </div>
+                        <div class="package-info">
+                            <h3>code-complexity-analyzer</h3>
+                            <span class="package-type">Python Package</span>
+                        </div>
+                    </div>
+                    
+                    <p class="package-description">
+                        A zero-dependency toolkit that measures Big-O, cyclomatic & Halstead complexity, 
+                        maintainability index, and detects code smells in one sweep. Perfect for code quality 
+                        analysis and technical debt management.
+                    </p>
+                    
+                    <div class="package-tags">
+                        <span class="package-tag"><i class="fas fa-chart-line"></i> Analysis</span>
+                        <span class="package-tag"><i class="fas fa-shield-alt"></i> Quality</span>
+                        <span class="package-tag"><i class="fas fa-battery-full"></i> Zero Deps</span>
+                    </div>
+                    
+                    <div class="package-actions">
+                        <a href="https://pypi.org/project/code-complexity-analyzer/1.0.0/" class="package-doc-link" target="_blank">
+                            <i class="fas fa-book"></i>
+                            View Documentation
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <div class="install-cmd">
+                            <i class="fas fa-terminal"></i>
+                            pip install code-complexity-analyzer
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 2: PyVoiceCraft -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-icon">
+                            <img src="pyvoicecraft-logo.png" alt="PyVoiceCraft">
+                        </div>
+                        <div class="package-info">
+                            <h3>PyVoiceCraft</h3>
+                            <span class="package-type">Python Package</span>
+                        </div>
+                    </div>
+                    
+                    <p class="package-description">
+                        Complete voice-based toolkit for designing voice assistants with speech recognition, 
+                        text-to-speech, voice profiles, audio processing, and conversation management. Build 
+                        production-ready voice applications with ease.
+                    </p>
+                    
+                    <div class="package-tags">
+                        <span class="package-tag"><i class="fas fa-microphone"></i> Voice AI</span>
+                        <span class="package-tag"><i class="fas fa-comments"></i> TTS/STT</span>
+                        <span class="package-tag"><i class="fas fa-robot"></i> Assistants</span>
+                    </div>
+                    
+                    <div class="package-actions">
+                        <a href="https://pypi.org/project/pyvoicecraft/1.0.0/" class="package-doc-link" target="_blank">
+                            <i class="fas fa-book"></i>
+                            View Documentation
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <div class="install-cmd">
+                            <i class="fas fa-terminal"></i>
+                            pip install pyvoicecraft
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 3: APIProtector -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-icon">
+                            <img src="api-logo.png" alt="APIProtector">
+                        </div>
+                        <div class="package-info">
+                            <h3>APIProtector</h3>
+                            <span class="package-type">Python Package</span>
+                        </div>
+                    </div>
+                    
+                    <p class="package-description">
+                        Protect your Python APIs with rate limiting, authentication, request validation, and basic 
+                        security tools. Works seamlessly with any Python framework including Django, Flask, Pyramid, 
+                        Bottle, and more.
+                    </p>
+                    
+                    <div class="package-tags">
+                        <span class="package-tag"><i class="fas fa-lock"></i> Security</span>
+                        <span class="package-tag"><i class="fas fa-tachometer-alt"></i> Rate Limiting</span>
+                        <span class="package-tag"><i class="fas fa-plug"></i> Framework Agnostic</span>
+                    </div>
+                    
+                    <div class="package-actions">
+                        <a href="https://pypi.org/project/apiprotector/1.0.0/" class="package-doc-link" target="_blank">
+                            <i class="fas fa-book"></i>
+                            View Documentation
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <div class="install-cmd">
+                            <i class="fas fa-terminal"></i>
+                            pip install apiprotector
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">© 2025 K.V.K.Phani Kumar. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="main.html">Home</a>
+                <a href="main.html#projects">Projects</a>
+                <a href="main.html#certificates">Certificates</a>
+                <a href="main.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.package-card, .book-showcase').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+
+
+
+

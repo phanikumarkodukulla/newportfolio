@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Stack | Phani Kumar's Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        @font-face {
+            font-family: 'ProductSans';
+            src: url('ProductSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #6366F1;
+            --dark-bg: #1a1a1a;
+            --darker-bg: #121212;
+            --light-text: #f5f5f5;
+            --dark-text: #333;
+            --card-bg: #252525;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ProductSans', 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .skills-container {
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        /* Back to Home Button */
+        .back-to-home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .back-to-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+            color: white;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .controls-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: var(--darker-bg);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--darker-bg);
+            border: 2px solid transparent;
+            border-radius: 25px;
+            color: var(--light-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            margin-right: 1rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+            background-color:var(--darker-bg);
+        }
+
+        .skill-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+
+        .skill-category {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .skill-level {
+            margin: 1rem 0;
+        }
+
+        .level-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--light-text);
+        }
+
+        .level-percentage {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--darker-bg);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        .skill-description {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .stats-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--light-text);
+            opacity: 0.6;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+        }
+
+        /* Specific icon colors for better visibility */
+        .python-icon { color: #3776ab; }
+        .javascript-icon { color: #f7df1e; }
+        .react-icon { color: #61dafb; }
+        .html-icon { color: #e34f26; }
+        .css-icon { color: #1572b6; }
+        .java-icon { color: #ed8b00; }
+        .cpp-icon { color: #00599c; }
+        .c-icon { color: #a8b9cc; }
+        .django-icon { color:rgb(170, 241, 214); }
+        .flask-icon { color: white; }
+        .nodejs-icon { color:rgb(107, 233, 107); }
+        .git-icon { color: #f05032; }
+        .github-icon { color:white; }
+        .bootstrap-icon { color: #7952b3; }
+        .tailwind-icon { color: #06b6d4; }
+        .aws-icon { color: #ff9900; }
+        .azure-icon { color: #0078d4; }
+        .docker-icon { color: #2496ed; }
+        .sql-icon { color:white; }
+        .postgresql-icon { color: #336791; }
+        .android-icon { color: #3ddc84; }
+    </style>
+</head>
+<body>
+    <!-- Back to Home Button -->
+    <a href="main.html" class="back-to-home-btn" title="Back to Home">
+        <i class="fas fa-home"></i>
+    </a>
+    
+    <div class="container skills-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">&lt;/ My Tech Stack &gt;</h1>
+            <p class="page-subtitle">Showcasing my expertise across various technologies, frameworks, and programming languages with proficiency levels and detailed insights.</p>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="searchInput" placeholder="Search skills (e.g., Python, React, Database...)">
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-btn active" data-filter="all">All Skills</button>
+                <button class="filter-btn" data-filter="programming language">Programming Languages</button>
+                <button class="filter-btn" data-filter="frontend">Frontend</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+                <button class="filter-btn" data-filter="database">Database</button>
+                <button class="filter-btn" data-filter="framework">Frameworks</button>
+                <button class="filter-btn" data-filter="ml">AI/ML</button>
+                <button class="filter-btn" data-filter="devops">DevOps</button>
+                <button class="filter-btn" data-filter="cloud">Cloud</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="tools">Tools</button>
+            </div>
+        </div>
+
+        <!-- Skills Grid -->
+        <div id="skillsGrid" class="skills-grid">
+            <!-- Skills will be populated by JavaScript -->
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <i class="fas fa-search-minus"></i>
+            <h3>No skills found</h3>
+            <p>Try adjusting your search terms or filters</p>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem;">Skills Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSkills">29</div>
+                    <div class="stat-label">Total Skills</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="advancedSkills">8</div>
+                    <div class="stat-label">Advanced Level</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="programmingLanguages">6</div>
+                    <div class="stat-label">Programming Languages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="frameworks">12</div>
+                    <div class="stat-label">Frameworks & Libraries</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Skills data with corrected categories
+        const skills = [
+        {
+                name: 'C',
+                category: 'programming language',
+                level: 'Intermediate',
+                percentage: 70,
+                icon: 'fab fa-cuttlefish c-icon',
+                description: 'Foundational knowledge of low-level programming, memory management, and embedded systems using the C language.'
+            },
+            {
+                name: 'C++',
+                category: 'programming language',
+                level: 'Intermediate',
+                percentage: 78,
+                icon: 'fas fa-code cpp-icon',
+                description: 'Strong grasp of OOP principles, STL, and algorithmic problem-solving using C++, especially for systems and competitive programming.'
+            },
+            {
+                name: 'Python',
+                category: 'programming language',
+                level: 'Advanced',
+                percentage: 90,
+                icon: 'fab fa-python python-icon',
+                description: 'Proficient in scripting, backend development, data analysis, and automation with Python. Experienced with scientific computing and simulations.'
+            },
+            {
+                name: 'HTML',
+                category: 'frontend',
+                level: 'Advanced',
+                percentage: 95,
+                icon: 'fab fa-html5 html-icon',
+                description: 'Expert in semantic HTML5, accessibility best practices, and modern web standards for structuring web content.'
+            },
+            {
+                name: 'CSS',
+                category: 'frontend',
+                level: 'Advanced',
+                percentage: 90,
+                icon: 'fab fa-css3-alt css-icon',
+                description: 'Advanced CSS3 skills including Flexbox, Grid, animations, responsive design, and modern layout techniques.'
+            },
+            {
+                name: 'JavaScript',
+                category: 'programming language',
+                level: 'Advanced',
+                percentage: 88,
+                icon: 'fab fa-js-square javascript-icon',
+                description: 'Expert in modern JavaScript ES6+, DOM manipulation, async programming, and building interactive web applications.'
+            },
+            {
+                name: 'Java',
+                category: 'programming language',
+                level: 'Intermediate',
+                percentage: 75,
+                icon: 'fab fa-java java-icon',
+                description: 'Solid understanding of OOP principles, data structures, and enterprise application development with Java.'
+            },
+            
+            {
+                name: 'React',
+                category: 'frontend',
+                level: 'Basics',
+                percentage: 75,
+                icon: 'fab fa-react react-icon',
+                description: 'Proficient in React hooks, component lifecycle, state management, and building scalable single-page applications.'
+            },
+            {
+                name: 'jQuery',
+                category: 'framework',
+                level: 'Intermediate',
+                percentage: 75,
+                icon: 'fas fa-code-branch',
+                description: 'Experienced with jQuery for DOM manipulation, event handling, and AJAX requests in web applications.'
+            },
+            {
+                name: 'Bootstrap',
+                category: 'framework',
+                level: 'Advanced',
+                percentage: 88,
+                icon: 'fab fa-bootstrap bootstrap-icon',
+                description: 'Expert in Bootstrap framework for rapid responsive web development and component-based UI design.'
+            },
+            {
+                name: 'Tailwind CSS',
+                category: 'framework',
+                level: 'Intermediate',
+                percentage: 80,
+                icon: 'fas fa-wind tailwind-icon',
+                description: 'Proficient in utility-first CSS framework for building custom designs rapidly and efficiently.'
+            },
+            {
+                name: 'Font Awsome',
+                category: 'framework',
+                level: 'Intermediate',
+                percentage: 80,
+                icon: 'fas fa-font-awesome',
+                description: 'Expert at using the Font Awesome library to create a highly iconic look with a wide range of icons, delivering a sleek, polished user interface'
+            },
+            {
+                name: 'Django',
+                category: 'backend',
+                level: 'Advanced',
+                percentage: 85,
+                icon: 'fas fa-server django-icon',
+                description: 'Experience building robust web applications with Django\'s MVC architecture, ORM, and admin customization.'
+            },
+            {
+                name: 'Flask',
+                category: 'backend',
+                level: 'Intermediate',
+                percentage: 78,
+                icon: 'fas fa-fire-alt flask-icon',
+                description: 'Skilled in lightweight Python web framework for building APIs and microservices with custom architecture.'
+            },
+            {
+                name: 'Node.js',
+                category: 'backend',
+                level: 'Intermediate',
+                percentage: 75,
+                icon: 'fab fa-node-js nodejs-icon',
+                description: 'Competent in server-side JavaScript development, building REST APIs, and working with npm ecosystem.'
+            },
+            {
+                name: 'SQL',
+                category: 'database',
+                level: 'Advanced',
+                percentage: 88,
+                icon: 'fas fa-database sql-icon',
+                description: 'Expert in writing complex queries, database design, optimization, and working with relational databases.'
+            },
+            {
+                name: 'SQLite',
+                category: 'database',
+                level: 'Intermediate',
+                percentage: 80,
+                icon: 'fas fa-database',
+                description: 'Experienced with lightweight database for development, testing, and small-scale applications.'
+            },
+            
+            {
+                name: 'Git',
+                category: 'devops',
+                level: 'Advanced',
+                percentage: 90,
+                icon: 'fab fa-git git-icon',
+                description: 'Expert in version control, branching strategies, merge conflict resolution, and collaborative development workflows.'
+            },
+            {
+                name: 'GitHub',
+                category: 'devops',
+                level: 'Advanced',
+                percentage: 88,
+                icon: 'fab fa-github github-icon',
+                description: 'Proficient in repository management, CI/CD workflows, project collaboration, and GitHub Actions.'
+            },
+            {
+                name: 'MS Azure',
+                category: 'cloud',
+                level: 'Beginner',
+                percentage: 60,
+                icon: 'fab fa-microsoft azure-icon',
+                description: 'Basic understanding of Microsoft Azure cloud services and deployment strategies.'
+            },
+            {
+                name: 'Docker',
+                category: 'devops',
+                level: 'Intermediate',
+                percentage: 75,
+                icon: 'fab fa-docker docker-icon',
+                description: 'Competent in containerizing applications, creating Dockerfiles, and managing container orchestration.'
+            },
+            {
+                name: 'NumPy',
+                category: 'ml',
+                level: 'Advanced',
+                percentage: 85,
+                icon: 'fas fa-calculator',
+                description: 'Expert in numerical computing, array operations, and mathematical functions for scientific applications.'
+            },
+            {
+                name: 'Pandas',
+                category: 'ml',
+                level: 'Advanced',
+                percentage: 88,
+                icon: 'fas fa-table',
+                description: 'Proficient in data manipulation, analysis, and cleaning using pandas DataFrames and Series.'
+            },
+            {
+                name: 'Matplotlib',
+                category: 'ml',
+                level: 'Intermediate',
+                percentage: 80,
+                icon: 'fas fa-chart-bar',
+                description: 'Skilled in creating comprehensive data visualizations, plots, and charts for data analysis.'
+            },
+            {
+                name: 'BeautifulSoup',
+                category: 'ml',
+                level: 'Intermediate',
+                percentage: 78,
+                icon: 'fas fa-search',
+                description: 'Experienced in web scraping, HTML parsing, and data extraction from web pages.'
+            },
+            {
+                name: 'AJAX',
+                category: 'framework',
+                level: 'Intermediate',
+                percentage: 75,
+                icon: 'fas fa-exchange-alt',
+                description: 'Proficient in asynchronous web requests, dynamic content loading, and creating responsive user interfaces.'
+            },
+            {
+                name: 'Android Development',
+                category: 'mobile',
+                level: 'Beginner',
+                percentage: 65,
+                icon: 'fab fa-android android-icon',
+                description: 'Basic knowledge of Android app development, UI design, and mobile application architecture.'
+            },
+            {
+                name: 'Postman',
+                category: 'tools',
+                level: 'Intermediate',
+                percentage: 80,
+                icon: 'fas fa-paper-plane',
+                description: 'Experienced in API testing, debugging, documentation, and automated testing workflows.'
+            },
+            {
+                name: 'AI Prompting',
+                category: 'tools',
+                level: 'Advanced',
+                percentage: 90,
+                icon: 'fas fa-robot',
+                description: 'Expert in crafting effective prompts for AI models, understanding AI capabilities, and optimizing AI interactions for various tasks.'
+            },
+             {
+        name: 'Render',
+        category: 'tools',
+        level: 'Advanced',
+        percentage: 85,
+        icon: 'fas fa-cloud',
+        description: 'Proficient in deploying and scaling web applications on the Render platform, configuring infrastructure-as-code, managing environments, and optimizing performance.'
+    },
+    {
+        name: 'VS Code',
+        category: 'tools',
+        level: 'Advanced',
+        percentage: 95,
+        icon: 'fas fa-code',
+        description: 'Expert in using Visual Studio Code for efficient development—customizing extensions, leveraging integrated debugging, remote development, and productivity workflows.'
+    }
+        ];
+
+        let filteredSkills = [...skills];
+
+        // DOM elements
+        const skillsGrid = document.getElementById('skillsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const noResults = document.getElementById('noResults');
+
+        // Render skills
+        function renderSkills(skillsToRender) {
+            if (skillsToRender.length === 0) {
+                skillsGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            skillsGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            skillsGrid.innerHTML = skillsToRender.map(skill => `
+                <div class="skill-card" data-category="${skill.category}">
+                    <div class="skill-header">
+                        <div class="skill-icon">
+                            <i class="${skill.icon}"></i>
+                        </div>
+                        <div class="skill-info">
+                            <h3>${skill.name}</h3>
+                            <div class="skill-category">${skill.category.charAt(0).toUpperCase() + skill.category.slice(1)}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-level">
+                        <div class="level-label">
+                            <span class="level-text">${skill.level}</span>
+                            <span class="level-percentage">${skill.percentage}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${skill.percentage}%"></div>
+                        </div>
+                    </div>
+                    
+                    <p class="skill-description">${skill.description}</p>
+                </div>
+            `).join('');
+        }
+
+        // Filter skills
+        function filterSkills() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+            filteredSkills = skills.filter(skill => {
+                const matchesSearch = skill.name.toLowerCase().includes(searchTerm) || 
+                                    skill.category.toLowerCase().includes(searchTerm) ||
+                                    skill.description.toLowerCase().includes(searchTerm);
+                
+                const matchesFilter = activeFilter === 'all' || skill.category === activeFilter;
+                
+                return matchesSearch && matchesFilter;
+            });
+
+            renderSkills(filteredSkills);
+            updateStats();
+        }
+
+        // Update statistics
+        function updateStats() {
+            const totalSkills = skills.length;
+            const advancedSkills = skills.filter(skill => skill.level === 'Advanced').length;
+            const programmingLanguages = skills.filter(skill => skill.category === 'programming language').length;
+            const frameworks = skills.filter(skill => skill.category === 'framework').length;
+
+            document.getElementById('totalSkills').textContent = totalSkills;
+            document.getElementById('advancedSkills').textContent = advancedSkills;
+            document.getElementById('programmingLanguages').textContent = programmingLanguages;
+            document.getElementById('frameworks').textContent = frameworks;
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterSkills);
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterSkills();
+            });
+        });
+
+        // Initialize
+        renderSkills(skills);
+        updateStats();
+
+        // Animate progress bars on load
+        setTimeout(() => {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }, 500);
+    </script>
+</body>
+</html>
+
+
+
