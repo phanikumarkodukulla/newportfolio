@@ -96,6 +96,44 @@
 
 
 
+.portfolio-text-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scene {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#svg-handwriting {
+    overflow: visible;
+    width: 80vw;
+    max-width: 900px;
+}
+
+#txt-handwriting {
+    fill: none;
+    stroke:rgb(247, 125, 3); /* Dark Blue */
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    font-family: 'Dancing Script', cursive;
+    font-size: 130px;
+    font-weight: 700;
+}
+
 /* Responsive design */
 @media (max-width: 1024px) {
     .half-text {
@@ -139,7 +177,7 @@
 /* Portfolio Text */
 .portfolio-text-wrapper {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
@@ -174,18 +212,27 @@
 
 /* Responsive font sizes for portfolio text */
 @media (max-width: 1024px) {
+    .portfolio-text-wrapper{
+        top: 48%;
+    }
     .portfolio-text {
         font-size: 70px;
     }
 }
 
 @media (max-width: 768px) {
+    .portfolio-text-wrapper{
+        top: 48%;
+    }
     .portfolio-text {
         font-size: 50px;
     }
 }
 
 @media (max-width: 480px) {
+    .portfolio-text-wrapper{
+        top: 48%;
+    }
     .portfolio-text {
         font-size: 35px;
     }

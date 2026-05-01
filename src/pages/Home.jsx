@@ -5,6 +5,21 @@ import resumePDF from "../resume.pdf";
 
 export default function Home() {
   const { isDark } = useTheme();
+  const [displayText, setDisplayText] = React.useState("");
+  const fullText =
+    "I'm a passionate software developer with a knack for crafting elegant solutions. With experience in full-stack development and machine learning, I thrive on turning complex problems into seamless digital experiences. Let's build something amazing together!";
+
+  React.useEffect(() => {
+    let index = 0;
+    const typingInterval = setInterval(() => {
+      setDisplayText(fullText.slice(0, index + 1));
+      index++;
+      if (index >= fullText.length) {
+        clearInterval(typingInterval);
+      }
+    }, 30);
+    return () => clearInterval(typingInterval);
+  }, []);
 
   return (
     <>
@@ -159,7 +174,6 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          overflow-y: auto;
           gap: 0;
         }
 
@@ -218,6 +232,55 @@ export default function Home() {
           color: ${isDark ? "#cbd5e1" : "#334155"};
           max-width: 680px;
           margin-bottom: calc(var(--gap-section) * 1.6);
+          overflow: hidden;
+          white-space: normal; /* Allow text to wrap if it needs to, but for typewriter we often want to animate character by character */
+          position: relative;
+        }
+
+        .typewriter-text {
+          display: inline;
+          background: linear-gradient(to right, var(--color-accent) 100%, transparent 100%);
+          background-size: 0% 100%;
+          background-repeat: no-repeat;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: reveal 3s linear forwards;
+          position: relative;
+        }
+
+        .description {
+          font-size: var(--fs-desc);
+          line-height: 1.7;
+          color: ${isDark ? "#cbd5e1" : "#334155"};
+          max-width: 680px;
+          margin-bottom: calc(var(--gap-section) * 1.6);
+          /* overflow: hidden; Removed to ensure cursor is visible */
+          position: relative;
+          min-height: 5em;
+        }
+
+        .typewriter-text {
+          font-family: var(--font-body);
+          display: inline;
+        }
+
+        .description span {
+          display: inline;
+        }
+
+        .description .cursor {
+          display: inline-block;
+          width: 8px;
+          height: 1.1em;
+          background-color: var(--color-accent);
+          margin-left: 4px;
+          vertical-align: middle;
+          animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
         }
 
         .action-buttons {
@@ -424,11 +487,8 @@ export default function Home() {
               </div>
 
               <p className="description">
-                I'm a passionate software developer with a knack for crafting
-                elegant solutions. With experience in full-stack development and
-                machine learning, I thrive on turning complex problems into
-                seamless digital experiences. Let's build something amazing
-                together!
+                {displayText}
+                <span className="cursor" aria-hidden="true"></span>
               </p>
 
               <div className="action-buttons">

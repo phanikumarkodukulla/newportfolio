@@ -137,7 +137,7 @@ export default function Contact() {
                 </p>
                 <a
                   href="mailto:contact.phanikumarkodukulla@gmail.com"
-                  className={`text-xs sm:text-base font-semibold hover:text-blue-400 transition ${isDark ? "text-white" : "text-gray-900"}`}
+                  className={`break-all sm:break-normal ${isDark ? "text-white" : "text-gray-900"}`}
                 >
                   contact.phanikumarkodukulla@gmail.com
                 </a>
