@@ -136,10 +136,10 @@ export default function Contact() {
                   Email
                 </p>
                 <a
-                  href="mailto:phanikumark715@gmail.com"
-                  className={`font-semibold hover:text-blue-400 transition ${isDark ? "text-white" : "text-gray-900"}`}
+                  href="mailto:contact.phanikumarkodukulla@gmail.com"
+                  className={`text-xs sm:text-base font-semibold hover:text-blue-400 transition ${isDark ? "text-white" : "text-gray-900"}`}
                 >
-                  phanikumark715@gmail.com
+                  contact.phanikumarkodukulla@gmail.com
                 </a>
               </div>
             </div>

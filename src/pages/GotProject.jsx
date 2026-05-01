@@ -45,7 +45,7 @@ export default function GotProject() {
         `Project Description:\n${formData.description}\n\n` +
         `Best regards,`,
     );
-    const mailtoLink = `mailto:phanikumark715@gmail.com?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:contact.phanikumarkodukulla@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   };
 
