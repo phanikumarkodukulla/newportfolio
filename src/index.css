@@ -111,4 +111,62 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+
+  /* Light Mode Overrides for Hardcoded Dark Classes */
+  [data-theme="light"] .text-white {
+    color: #1A202C !important;
+  }
+  [data-theme="light"] .text-gray-300,
+  [data-theme="light"] .text-gray-400 {
+    color: #4B5563 !important;
+  }
+  [data-theme="light"] .bg-\[\#0A1929\] {
+    background-color: #FFFFFF !important;
+  }
+  [data-theme="light"] .bg-\[\#020817\] {
+    background-color: #F9FAFB !important;
+  }
+  [data-theme="light"] .bg-\[\#0F2942\] {
+    background-color: #F3F4F6 !important;
+  }
+  [data-theme="light"] .border-white\/10 {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  [data-theme="light"] .border-white\/5 {
+    border-color: rgba(0, 0, 0, 0.05) !important;
+  }
+  [data-theme="light"] .bg-white\/5,
+  [data-theme="light"] .bg-white\/10 {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+  [data-theme="light"] .bg-white\/\[0\.03\] {
+    background-color: rgba(0, 0, 0, 0.03) !important;
+  }
+  [data-theme="light"] .from-\[\#020817\] {
+    --tw-gradient-from: #F9FAFB var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(249 250 251 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+  [data-theme="light"] .to-\[\#0A1929\] {
+    --tw-gradient-to: #FFFFFF var(--tw-gradient-to-position);
+  }
+  [data-theme="light"] .from-\[\#0A1929\] {
+    --tw-gradient-from: #FFFFFF var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+  [data-theme="light"] .to-\[\#020817\] {
+    --tw-gradient-to: #F9FAFB var(--tw-gradient-to-position);
+  }
+  /* Exempting button text */
+  [data-theme="light"] .bg-blue-600.text-white,
+  [data-theme="light"] .bg-gradient-to-r.text-white {
+    color: #FFFFFF !important;
+  }
+  [data-theme="light"] .text-\[\#E8F1F5\] {
+    color: #1A202C !important;
+  }
+  [data-theme="light"] .text-\[\#E8F1F5\]\/60 {
+    color: rgba(26, 32, 44, 0.6) !important;
+  }
 }

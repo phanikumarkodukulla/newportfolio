@@ -447,7 +447,7 @@ export default function Certifications() {
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 text-white`}
+          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
         >
           Professional <span className="text-gradient">Certifications</span>
           <div
@@ -602,7 +602,7 @@ export default function Certifications() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h3
-                      className={`text-lg font-bold leading-tight transition-colors duration-300 text-white`}
+                      className={`text-lg font-bold leading-tight transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
                     >
                       {cert.title}
                     </h3>
@@ -613,7 +613,7 @@ export default function Certifications() {
                     )}
                   </div>
                   <p
-                    className={`text-sm font-medium transition-colors duration-300 text-blue-400`}
+                    className={`text-sm font-medium transition-colors duration-300 ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
                   >
                     Issued by: {cert.organization}
                   </p>
@@ -621,14 +621,14 @@ export default function Certifications() {
               </div>
 
               <div
-                className={`flex items-center gap-2 text-xs mb-4 font-mono transition-colors duration-300 text-gray-400`}
+                className={`flex items-center gap-2 text-xs mb-4 font-mono transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}
               >
                 <Calendar size={14} />
                 <span>{cert.issued}</span>
               </div>
 
               <p
-                className={`text-sm mb-6 flex-grow transition-colors duration-300 text-gray-400`}
+                className={`text-sm mb-6 flex-grow transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
               >
                 {cert.description}
               </p>

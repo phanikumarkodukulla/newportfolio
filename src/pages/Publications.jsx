@@ -88,7 +88,7 @@ export default function Publications() {
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 text-white`}
+          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
         >
           Publications & <span className="text-gradient">Open Source</span>
         </motion.h2>
@@ -96,7 +96,7 @@ export default function Publications() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className={`mt-4 max-w-2xl mx-auto transition-colors duration-300 text-gray-400`}
+          className={`mt-4 max-w-2xl mx-auto transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
         >
           Python packages, books, and tools I've created for the developer
           community
@@ -111,7 +111,7 @@ export default function Publications() {
             size={32}
           />
           <h3
-            className={`text-3xl font-bold font-display transition-colors duration-300 text-white`}
+            className={`text-3xl font-bold font-display transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
             Books I Published
           </h3>
@@ -125,11 +125,11 @@ export default function Publications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className={`glass-card rounded-2xl border overflow-hidden flex flex-col md:flex-row transition-colors duration-300 border-white/10 hover:border-blue-500/50`}
+              className={`glass-card rounded-2xl border overflow-hidden flex flex-col md:flex-row transition-colors duration-300 ${isDark ? 'border-white/10 hover:border-blue-500/50' : 'border-black/10 hover:border-blue-500/50 bg-white shadow-sm'}`}
             >
               {/* 3D Book Visual */}
               <div
-                className={`p-12 flex items-center justify-center shrink-0 md:w-1/3 relative overflow-hidden group transition-colors duration-300 bg-gradient-to-br from-blue-900/40 to-indigo-900/40`}
+                className={`p-12 flex items-center justify-center shrink-0 md:w-1/3 relative overflow-hidden group transition-colors duration-300 ${isDark ? 'bg-gradient-to-br from-blue-900/40 to-indigo-900/40' : 'bg-gradient-to-br from-blue-100 to-indigo-100'}`}
               >
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
 
@@ -151,12 +151,12 @@ export default function Publications() {
               {/* Book Content */}
               <div className="p-8 md:w-2/3 flex flex-col justify-center">
                 <h4
-                  className={`text-2xl font-bold mb-4 font-display transition-colors duration-300 text-white`}
+                  className={`text-2xl font-bold mb-4 font-display transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
                   {book.title}
                 </h4>
                 <p
-                  className={`mb-6 leading-relaxed transition-colors duration-300 text-gray-300`}
+                  className={`mb-6 leading-relaxed transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
                   {book.description}
                 </p>
@@ -165,7 +165,7 @@ export default function Publications() {
                   {book.features.map((feature, i) => (
                     <div
                       key={i}
-                      className={`flex items-center gap-2 text-sm transition-colors duration-300 text-gray-400`}
+                      className={`flex items-center gap-2 text-sm transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-700'}`}
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
                       {feature}
@@ -174,7 +174,7 @@ export default function Publications() {
                 </div>
 
                 <div
-                  className={`flex gap-8 pt-6 border-t transition-colors duration-300 border-white/10`}
+                  className={`flex gap-8 pt-6 border-t transition-colors duration-300 ${isDark ? 'border-white/10' : 'border-black/10'}`}
                 >
                   {book.stats.map((stat, i) => (
                     <div key={i} className="text-center">
@@ -203,7 +203,7 @@ export default function Publications() {
             size={32}
           />
           <h3
-            className={`text-3xl font-bold font-display transition-colors duration-300 text-white`}
+            className={`text-3xl font-bold font-display transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
           >
             Python Packages
           </h3>
@@ -217,13 +217,13 @@ export default function Publications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`glass-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden group border border-white/10 hover:border-indigo-500/50 hover:shadow-[0_20px_40px_rgba(79,70,229,0.2)]`}
+              className={`glass-card rounded-2xl p-8 transition-all duration-300 hover:-translate-y-2 flex flex-col h-full relative overflow-hidden group border ${isDark ? 'border-white/10 hover:border-indigo-500/50 hover:shadow-[0_20px_40px_rgba(79,70,229,0.2)]' : 'border-black/10 hover:border-indigo-500/50 hover:shadow-[0_20px_40px_rgba(79,70,229,0.1)] bg-white/50'}`}
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></div>
 
               <div className="flex items-center gap-4 mb-6">
                 <div
-                  className={`w-16 h-16 rounded-xl flex items-center justify-center border transition-colors duration-300 bg-indigo-500/10 border-indigo-500/20`}
+                  className={`w-16 h-16 rounded-xl flex items-center justify-center border transition-colors duration-300 ${isDark ? 'bg-indigo-500/10 border-indigo-500/20' : 'bg-indigo-50 border-indigo-200'}`}
                 >
                   <Terminal
                     size={28}
@@ -232,7 +232,7 @@ export default function Publications() {
                 </div>
                 <div>
                   <h4
-                    className={`text-xl font-bold mb-1 font-display leading-tight transition-colors duration-300 text-white`}
+                    className={`text-xl font-bold mb-1 font-display leading-tight transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
                   >
                     {pkg.name}
                   </h4>
@@ -245,7 +245,7 @@ export default function Publications() {
               </div>
 
               <p
-                className={`text-sm mb-6 flex-grow leading-relaxed transition-colors duration-300 text-gray-400`}
+                className={`text-sm mb-6 flex-grow leading-relaxed transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
               >
                 {pkg.description}
               </p>
@@ -254,7 +254,7 @@ export default function Publications() {
                 {pkg.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className={`px-3 py-1 rounded-full text-xs transition-colors duration-300 bg-white/5 border border-white/10 text-blue-300`}
+                    className={`px-3 py-1 rounded-full text-xs transition-colors duration-300 ${isDark ? 'bg-white/5 border-white/10 text-blue-300' : 'bg-black/5 border-black/10 text-blue-700'}`}
                   >
                     {tag}
                   </span>
@@ -273,7 +273,7 @@ export default function Publications() {
                 </a>
 
                 <div
-                  className={`w-full flex items-center gap-3 py-3 px-4 rounded-xl font-mono text-sm border-l-2 border-l-indigo-500 transition-colors duration-300 bg-black/40 border border-white/10 text-indigo-300`}
+                  className={`w-full flex items-center gap-3 py-3 px-4 rounded-xl font-mono text-sm border-l-2 border-l-indigo-500 transition-colors duration-300 ${isDark ? 'bg-black/40 border-white/10 text-indigo-300' : 'bg-gray-100 border-black/10 text-indigo-700'}`}
                 >
                   <Terminal
                     size={16}

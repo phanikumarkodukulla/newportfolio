@@ -2,8 +2,9 @@ import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
+import { useTheme } from '../context/ThemeContext';
 
-function AnimatedPoints() {
+function AnimatedPoints({ isDark }) {
   const pointsRef = useRef();
 
   useFrame(({ clock }) => {
@@ -32,10 +33,10 @@ function AnimatedPoints() {
       </bufferGeometry>
       <pointsMaterial
         size={0.05}
-        color="#3B82F6"
+        color={isDark ? "#3B82F6" : "#2563EB"}
         sizeAttenuation={true}
         transparent={true}
-        opacity={0.6}
+        opacity={isDark ? 0.6 : 0.8}
         blending={THREE.AdditiveBlending}
       />
     </points>
@@ -43,13 +44,15 @@ function AnimatedPoints() {
 }
 
 export default function Scene3D() {
+  const { isDark } = useTheme();
+
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none bg-gradient-to-br from-[#020817] to-[#0A1929]">
+    <div className={`fixed inset-0 z-0 pointer-events-none transition-colors duration-500 ${isDark ? 'bg-gradient-to-br from-[#020817] to-[#0A1929]' : 'bg-gradient-to-br from-[#F9FAFB] to-[#F3F4F6]'}`}>
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-        <color attach="background" args={['#020817']} />
-        <ambientLight intensity={0.5} />
-        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
-        <AnimatedPoints />
+        <color attach="background" args={[isDark ? '#020817' : '#F9FAFB']} />
+        <ambientLight intensity={isDark ? 0.5 : 0.8} />
+        {isDark && <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />}
+        <AnimatedPoints isDark={isDark} />
       </Canvas>
     </div>
   );

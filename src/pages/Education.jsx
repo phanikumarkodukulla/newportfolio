@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Calendar, MapPin, Award, CheckCircle, Clock } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const educationData = [
   {
@@ -55,6 +56,8 @@ const educationData = [
 ];
 
 export default function Education() {
+  const { isDark } = useTheme();
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-12 md:py-20 relative bg-transparent">
       {/* Header */}
@@ -62,7 +65,7 @@ export default function Education() {
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl md:text-5xl font-bold text-white"
+          className={`text-3xl md:text-5xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}
         >
           Education <span className="text-blue-500">Journey</span>
         </motion.h2>
@@ -83,12 +86,12 @@ export default function Education() {
               className="relative pl-12 md:pl-24"
             >
               {/* Responsive Timeline Dot */}
-              <div className="absolute left-[11px] md:left-[31px] top-6 md:top-8 w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-500 ring-4 ring-[#020817] shadow-[0_0_10px_rgba(37,99,235,0.6)]" />
+              <div className={`absolute left-[11px] md:left-[31px] top-6 md:top-8 w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-500 ring-4 shadow-[0_0_10px_rgba(37,99,235,0.6)] ${isDark ? 'ring-[#020817]' : 'ring-[#F9FAFB]'}`} />
 
               {/* Card Container */}
-              <div className="p-5 md:p-8 rounded-2xl md:rounded-3xl bg-[#ffffff08] border border-white/10 hover:-translate-y-1 transition-transform duration-300">
+              <div className={`p-5 md:p-8 rounded-2xl md:rounded-3xl border hover:-translate-y-1 transition-transform duration-300 ${isDark ? 'bg-[#ffffff08] border-white/10' : 'bg-white border-black/10 shadow-sm'}`}>
                 {/* Title & Institution */}
-                <h3 className="text-xl md:text-2xl font-bold mb-1 text-white">
+                <h3 className={`text-xl md:text-2xl font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                   {edu.degree}
                 </h3>
                 <h4 className="text-base md:text-lg mb-3 text-blue-400">
@@ -96,7 +99,7 @@ export default function Education() {
                 </h4>
 
                 {/* Date & Location Grid for Mobile */}
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4 text-xs md:text-sm text-gray-400">
+                <div className={`flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4 text-xs md:text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   <div className="flex items-center gap-1.5">
                     <Calendar size={14} className="text-blue-500" />
                     <span>{edu.period}</span>
@@ -122,12 +125,12 @@ export default function Education() {
                   {edu.details.map((detail) => (
                     <div
                       key={detail.label}
-                      className="p-3 rounded-lg bg-[#020817]/50 border border-white/5"
+                      className={`p-3 rounded-lg border ${isDark ? 'bg-[#020817]/50 border-white/5' : 'bg-gray-50 border-black/5'}`}
                     >
                       <div className="text-[10px] md:text-xs uppercase tracking-wider mb-1 text-gray-500">
                         {detail.label}
                       </div>
-                      <div className="text-sm md:text-lg font-semibold text-gray-200">
+                      <div className={`text-sm md:text-lg font-semibold ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                         {detail.value}
                       </div>
                     </div>
@@ -135,13 +138,13 @@ export default function Education() {
                 </div>
 
                 {/* Description */}
-                <p className="mb-5 text-sm md:text-base text-gray-400 leading-relaxed">
+                <p className={`mb-5 text-sm md:text-base leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   {edu.description}
                 </p>
 
                 {/* Achievements Pill Tags */}
                 <div>
-                  <div className="flex items-center gap-1.5 text-xs md:text-sm mb-2 text-gray-300">
+                  <div className={`flex items-center gap-1.5 text-xs md:text-sm mb-2 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                     <Award size={14} className="text-amber-500" />
                     <span className="font-semibold uppercase tracking-wider">
                       Highlights

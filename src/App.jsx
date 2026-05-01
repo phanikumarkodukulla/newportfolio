@@ -12,7 +12,9 @@ import Certifications from "./pages/Certifications";
 import Publications from "./pages/Publications";
 import Priest from "./pages/Priest";
 import Contact from "./pages/Contact";
+import GotProject from "./pages/GotProject";
 import Loading from "./pages/Loading";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   const location = useLocation();
@@ -43,13 +45,16 @@ function App() {
       <div
         className="relative w-full min-h-screen transition-colors duration-300"
         style={{
-          color: "#E8F1F5",
+          color: "var(--text-primary)",
           opacity: loadingComplete ? 1 : 0,
           pointerEvents: loadingComplete ? "auto" : "none",
           transition:
             "opacity 0.5s ease-in-out, color 0.3s ease, background-color 0.3s ease",
         }}
       >
+        {/* Theme Toggle (Mobile Only) */}
+        <ThemeToggle className="fixed top-6 right-6 md:hidden" />
+
         {/* 3D Background */}
         <Scene3D />
 
@@ -66,6 +71,7 @@ function App() {
                 <Route path="/certifications" element={<Certifications />} />
                 <Route path="/publications" element={<Publications />} />
                 <Route path="/priest" element={<Priest />} />
+                <Route path="/got-project" element={<GotProject />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </AnimatePresence>

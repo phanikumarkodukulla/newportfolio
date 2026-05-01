@@ -123,7 +123,7 @@ export default function Priest() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-4 transition-colors duration-300 bg-black/30">
+      <section className={`py-20 px-4 transition-colors duration-300 ${isDark ? 'bg-black/30' : 'bg-gray-50'}`}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -146,7 +146,7 @@ export default function Priest() {
               endeavors.
             </p>
             <p
-              className={`text-lg leading-relaxed transition-colors duration-300 text-gray-300`}
+              className={`text-lg leading-relaxed transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
             >
               I specialize in traditional Hindu ceremonies, including weddings,
               house warmings, naming ceremonies, and various pujas. My approach
@@ -203,18 +203,18 @@ export default function Priest() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card p-8 rounded-2xl border border-yellow-500/20 hover:border-yellow-500/50 hover:-translate-y-2 transition-all duration-300 group"
+                className={`glass-card p-8 rounded-2xl border transition-all duration-300 group hover:-translate-y-2 ${isDark ? 'border-yellow-500/20 hover:border-yellow-500/50' : 'border-yellow-500/30 hover:border-yellow-500 bg-white shadow-sm'}`}
               >
                 <div className="w-16 h-16 rounded-full bg-yellow-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-yellow-500/20 transition-all duration-300 border border-yellow-500/20">
                   {service.icon}
                 </div>
                 <h3
-                  className={`text-xl font-bold mb-4 transition-colors duration-300 text-white`}
+                  className={`text-xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
                 >
                   {service.title}
                 </h3>
                 <p
-                  className={`leading-relaxed transition-colors duration-300 text-gray-400`}
+                  className={`leading-relaxed transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                 >
                   {service.description}
                 </p>
@@ -226,7 +226,7 @@ export default function Priest() {
 
       {/* Testimonials */}
       <section
-        className={`py-24 px-4 transition-colors duration-300 bg-black/30`}
+        className={`py-24 px-4 transition-colors duration-300 ${isDark ? 'bg-black/30' : 'bg-gray-50'}`}
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -248,7 +248,7 @@ export default function Priest() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`glass-card p-8 rounded-2xl relative transition-colors duration-300 border border-white/10`}
+                className={`glass-card p-8 rounded-2xl relative transition-colors duration-300 border ${isDark ? 'border-white/10' : 'border-black/10 bg-white shadow-sm'}`}
               >
                 <div className="flex gap-1 mb-6">
                   {[...Array(5)].map((_, j) => (
@@ -264,7 +264,7 @@ export default function Priest() {
                   ))}
                 </div>
                 <p
-                  className={`italic mb-6 transition-colors duration-300 text-gray-300`}
+                  className={`italic mb-6 transition-colors duration-300 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}
                 >
                   "{t.text}"
                 </p>
@@ -282,7 +282,7 @@ export default function Priest() {
       {/* Contact Section */}
       <section className="py-24 px-4">
         <div
-          className={`max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 transition-all duration-300 border border-yellow-500/30 shadow-[0_0_50px_rgba(234,179,8,0.1)] bg-white/[0.03]`}
+          className={`max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 transition-all duration-300 border shadow-[0_0_50px_rgba(234,179,8,0.1)] ${isDark ? 'border-yellow-500/30 bg-white/[0.03]' : 'border-yellow-500/50 bg-white'}`}
         >
           <div className="text-center mb-12">
             <div
@@ -293,17 +293,17 @@ export default function Priest() {
               <span>ॐ</span>
             </div>
             <h2
-              className={`text-3xl font-bold mb-2 transition-colors duration-300 text-white`}
+              className={`text-3xl font-bold mb-2 transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}
             >
               Contact Me
             </h2>
-            <p className={`transition-colors duration-300 text-gray-400`}>
+            <p className={`transition-colors duration-300 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               Reach out for any spiritual ceremonies and guidance.
             </p>
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 pb-12 transition-colors duration-300 border-b border-white/10`}
+            className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 pb-12 transition-colors duration-300 border-b ${isDark ? 'border-white/10' : 'border-black/10'}`}
           >
             <div className="text-center">
               <div
@@ -311,7 +311,7 @@ export default function Priest() {
               >
                 <Phone size={24} />
               </div>
-              <p className={`transition-colors duration-300 text-white`}>
+              <p className={`transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 +91 98765 43210
               </p>
             </div>
@@ -321,7 +321,7 @@ export default function Priest() {
               >
                 <Mail size={24} />
               </div>
-              <p className={`transition-colors duration-300 text-white`}>
+              <p className={`transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 phanikumar.priest@gmail.com
               </p>
             </div>
@@ -331,7 +331,7 @@ export default function Priest() {
               >
                 <MapPin size={24} />
               </div>
-              <p className={`transition-colors duration-300 text-white`}>
+              <p className={`transition-colors duration-300 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                 Hyderabad, Telangana
               </p>
             </div>
@@ -349,23 +349,23 @@ export default function Priest() {
                 type="text"
                 placeholder="Your Name"
                 required
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 bg-white/5 border border-white/10 text-white focus:border-yellow-500`}
+                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 border focus:border-yellow-500 ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-gray-50 border-black/10 text-gray-900'}`}
               />
               <input
                 type="email"
                 placeholder="Your Email"
                 required
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 bg-white/5 border border-white/10 text-white focus:border-yellow-500`}
+                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 border focus:border-yellow-500 ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-gray-50 border-black/10 text-gray-900'}`}
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
                 required
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 bg-white/5 border border-white/10 text-white focus:border-yellow-500`}
+                className={`w-full rounded-xl px-4 py-3 focus:outline-none transition-colors duration-300 border focus:border-yellow-500 ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-gray-50 border-black/10 text-gray-900'}`}
               />
               <select
                 required
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none appearance-none transition-colors duration-300 bg-[#0A1929] border border-white/10 text-white focus:border-yellow-500`}
+                className={`w-full rounded-xl px-4 py-3 focus:outline-none appearance-none transition-colors duration-300 border focus:border-yellow-500 ${isDark ? 'bg-[#0A1929] border-white/10 text-white' : 'bg-gray-50 border-black/10 text-gray-900'}`}
               >
                 <option
                   value=""
@@ -385,7 +385,7 @@ export default function Priest() {
               placeholder="Your Message / Requirements"
               rows={4}
               required
-              className={`w-full rounded-xl px-4 py-3 focus:outline-none resize-none transition-colors duration-300 bg-white/5 border border-white/10 text-white focus:border-yellow-500`}
+              className={`w-full rounded-xl px-4 py-3 focus:outline-none resize-none transition-colors duration-300 border focus:border-yellow-500 ${isDark ? 'bg-white/5 border-white/10 text-white' : 'bg-gray-50 border-black/10 text-gray-900'}`}
             ></textarea>
 
             <button

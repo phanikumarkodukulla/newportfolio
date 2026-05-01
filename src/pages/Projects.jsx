@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const projects = [
   {
     name: "AI Powered Industrial and Business Management System",
     description: "AI hub for industries and bussinesses",
+    featured: true,
     technologies: [
       "Full-Stack Web Development",
       "Machine Learning",
@@ -17,6 +19,7 @@ const projects = [
     name: "Anti Ragging Portal",
     description:
       "A secure grievance portal for confidential complaint submission, tracking, and transparent management.",
+    featured: true,
     technologies: ["Full-Stack Web Development"],
     liveDemo: "https://anits-antiragging-portal.onrender.com/",
   },
@@ -24,6 +27,7 @@ const projects = [
     name: "CURSORS-2K26",
     description:
       "A scalable full-stack technical fest website built for ANITS with modern web technologies and cloud deployment.",
+    featured: true,
     technologies: ["Full-Stack Web Development"],
     liveDemo: "https://cursors2k26.onrender.com/",
   },
@@ -31,8 +35,24 @@ const projects = [
     name: "ICANITS Website",
     description:
       "Official conference website for ICANITS 2026 with responsive design and seamless event information management.",
+    featured: true,
     technologies: ["Full-Stack Web Development"],
     liveDemo: "https://anits.org/ICANITS2026/",
+  },
+  {
+    name: "Write Out",
+    description:
+      "A minimalist writing application designed to enhance focus and creativity with distraction-free interface.",
+    featured: true,
+    technologies: [
+      "Django",
+      "Pandas",
+      "Numpy",
+      "Matplotlib",
+      "Seaborn",
+      "Google API",
+    ],
+    liveDemo: "#",
   },
   {
     name: "Phanolink",
@@ -48,20 +68,6 @@ const projects = [
       "Bootstrap",
     ],
     liveDemo: "https://phanolink.onrender.com/",
-  },
-  {
-    name: "Write Out",
-    description:
-      "A minimalist writing application designed to enhance focus and creativity with distraction-free interface.",
-    technologies: [
-      "Django",
-      "Pandas",
-      "Numpy",
-      "Matplotlib",
-      "Seaborn",
-      "Google API",
-    ],
-    liveDemo: "#",
   },
   {
     name: "Cook Book",
@@ -211,6 +217,7 @@ const projects = [
 ];
 
 function ProjectCard({ project }) {
+  const { isDark } = useTheme();
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
 
@@ -252,17 +259,24 @@ function ProjectCard({ project }) {
           transformPerspective: 1000,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className={`w-full h-full glass-card rounded-2xl overflow-hidden flex flex-col group transform-style-3d shadow-2xl transition-colors duration-300 border border-white/10 bg-white/[0.03]`}
+        className={`w-full h-full glass-card rounded-2xl overflow-hidden flex flex-col group transform-style-3d shadow-2xl transition-colors duration-300 border ${isDark ? "border-white/10 bg-white/[0.03]" : "border-black/10 bg-black/[0.03]"}`}
       >
         <div
-          className={`p-6 border-b transform-style-3d transition-colors duration-300 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border-white/5`}
+          className={`p-6 border-b transform-style-3d transition-colors duration-300 ${isDark ? "bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border-white/5" : "bg-gradient-to-r from-blue-600/10 to-indigo-600/10 border-black/5"}`}
           style={{ transform: "translateZ(30px)" }}
         >
-          <h3
-            className={`text-2xl font-bold mb-2 tracking-wide font-display transition-colors duration-300 text-white`}
-          >
-            {project.name}
-          </h3>
+          <div className="flex justify-between items-start mb-2">
+            <h3
+              className={`text-2xl font-bold tracking-wide font-display transition-colors duration-300 ${isDark ? "text-white" : "text-gray-900"}`}
+            >
+              {project.name}
+            </h3>
+            {project.featured && (
+              <span className="px-2 py-1 rounded-md bg-yellow-400 text-black text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-[0_0_10px_rgba(250,204,21,0.4)]">
+                <Star size={10} fill="black" /> Featured
+              </span>
+            )}
+          </div>
         </div>
 
         <div
@@ -270,7 +284,7 @@ function ProjectCard({ project }) {
           style={{ transform: "translateZ(20px)" }}
         >
           <p
-            className={`mb-6 flex-grow leading-relaxed transition-colors duration-300 text-gray-300`}
+            className={`mb-6 flex-grow leading-relaxed transition-colors duration-300 ${isDark ? "text-gray-300" : "text-gray-600"}`}
           >
             {project.description}
           </p>
@@ -279,7 +293,7 @@ function ProjectCard({ project }) {
             {project.technologies.map((tech) => (
               <span
                 key={tech}
-                className={`px-3 py-1 rounded-full text-xs border font-mono transition-colors duration-300 bg-blue-500/10 text-blue-300 border-blue-500/20`}
+                className={`px-3 py-1 rounded-full text-xs border font-mono transition-colors duration-300 ${isDark ? "bg-blue-500/10 text-blue-300 border-blue-500/20" : "bg-blue-500/5 text-blue-700 border-blue-500/20"}`}
               >
                 {tech}
               </span>
@@ -300,7 +314,7 @@ function ProjectCard({ project }) {
 
         {/* Glow effect on hover */}
         <div
-          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-tr from-blue-500/0 via-white/5 to-white/0`}
+          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isDark ? "bg-gradient-to-tr from-blue-500/0 via-white/5 to-white/0" : "bg-gradient-to-tr from-blue-500/0 via-black/5 to-black/0"}`}
         />
       </motion.div>
     </motion.div>
@@ -308,6 +322,8 @@ function ProjectCard({ project }) {
 }
 
 export default function Projects() {
+  const { isDark } = useTheme();
+
   return (
     <div
       className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 transition-colors duration-300 bg-transparent`}
@@ -316,15 +332,15 @@ export default function Projects() {
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 text-white`}
+          className={`text-4xl md:text-5xl font-bold font-display inline-block relative transition-colors duration-300 ${isDark ? "text-white" : "text-gray-900"}`}
         >
-          Featured <span className="text-gradient">Projects</span>
+          My <span className="text-gradient">Projects</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className={`mt-4 max-w-2xl mx-auto transition-colors duration-300 text-gray-400`}
+          className={`mt-4 max-w-2xl mx-auto transition-colors duration-300 ${isDark ? "text-gray-400" : "text-gray-600"}`}
         >
           Explore some of my recent work showcasing interactive web
           applications, AI models, and robust backend systems.

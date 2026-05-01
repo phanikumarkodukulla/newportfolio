@@ -11,9 +11,13 @@ import {
   BookOpen,
   Flame,
   Mail,
+  Rocket,
 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
+  const { isDark } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -37,7 +41,12 @@ export default function Navbar() {
       path: "/publications",
       icon: <BookOpen size={20} />,
     },
-    { name: "Priest", path: "/priest", icon: <Flame size={20} /> },
+    // { name: "Priest", path: "/priest", icon: <Flame size={20} /> },
+    {
+      name: "Got a Project?",
+      path: "/got-project",
+      icon: <Rocket size={20} />,
+    },
     { name: "Contact", path: "/contact", icon: <Mail size={20} /> },
   ];
 
@@ -67,8 +76,8 @@ export default function Navbar() {
       {/* =========================================
           DESKTOP NAVIGATION
           ========================================= */}
-      <div className="hidden md:flex fixed bottom-6 left-0 right-0 z-50 justify-center pointer-events-none px-4">
-        <nav className="bg-[#020817]/80 backdrop-blur-xl border border-[rgba(255,255,255,0.1)] rounded-full p-2 flex items-center gap-1 sm:gap-2 shadow-[0_10px_40px_rgba(0,0,0,0.5)] pointer-events-auto overflow-x-auto hide-scrollbar max-w-full">
+      <div className="hidden md:flex fixed bottom-6 left-0 right-0 z-50 justify-center pointer-events-none px-4 items-center gap-4">
+        <nav className={`backdrop-blur-xl border rounded-full p-2 flex items-center gap-1 sm:gap-2 shadow-[0_10px_40px_rgba(0,0,0,0.5)] pointer-events-auto overflow-x-auto hide-scrollbar max-w-full ${isDark ? 'bg-[#020817]/80 border-[rgba(255,255,255,0.1)]' : 'bg-white/80 border-black/10'}`}>
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
@@ -77,8 +86,8 @@ export default function Navbar() {
                 to={link.path}
                 className={`relative px-4 py-3 rounded-full flex items-center justify-center gap-2 transition-colors duration-300 ${
                   isActive
-                    ? "text-[#E8F1F5]"
-                    : "text-[#E8F1F5]/60 hover:text-[#E8F1F5] hover:bg-white/5"
+                    ? isDark ? "text-white" : "text-gray-900"
+                    : isDark ? "text-gray-400 hover:text-white hover:bg-white/5" : "text-gray-500 hover:text-gray-900 hover:bg-black/5"
                 }`}
               >
                 {isActive && (
@@ -98,6 +107,9 @@ export default function Navbar() {
             );
           })}
         </nav>
+        <div className="pointer-events-auto flex items-center justify-center">
+          <ThemeToggle className="relative" />
+        </div>
         <style>{`
           .hide-scrollbar::-webkit-scrollbar { display: none; }
           .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -115,7 +127,7 @@ export default function Navbar() {
         </div>
 
         {/* Center Hub - Completely Empty */}
-        <div className="absolute -bottom-[105px] left-1/2 -translate-x-1/2 w-[110px] h-[110px] bg-gradient-to-br from-[#0A1929] to-[#020817] rounded-full z-50 border-[4px] border-[#1E3A5F] shadow-[0_-5px_15px_rgba(0,0,0,0.8),inset_0_4px_10px_rgba(0,0,0,0.5)] pointer-events-auto"></div>
+        <div className={`absolute -bottom-[105px] left-1/2 -translate-x-1/2 w-[110px] h-[110px] rounded-full z-50 shadow-[0_-5px_15px_rgba(0,0,0,0.8),inset_0_4px_10px_rgba(0,0,0,0.5)] pointer-events-auto border-[4px] ${isDark ? 'bg-gradient-to-br from-[#0A1929] to-[#020817] border-[#1E3A5F]' : 'bg-gradient-to-br from-gray-100 to-gray-300 border-gray-400 shadow-[0_-5px_15px_rgba(0,0,0,0.2),inset_0_4px_10px_rgba(0,0,0,0.1)]'}`}></div>
 
         {/* The Rotating Mechanical Dial */}
         <motion.div
@@ -151,11 +163,11 @@ export default function Navbar() {
             mass: 0.8,
           }}
           whileTap={{ cursor: "grabbing" }}
-          className="absolute -bottom-[255px] left-1/2 -translate-x-1/2 w-[340px] h-[340px] rounded-full bg-[#0F2942] pointer-events-auto cursor-grab shadow-[inset_0_5px_20px_rgba(255,255,255,0.05),0_15px_30px_rgba(0,0,0,0.9)] border-[2px] border-[rgba(255,255,255,0.1)]"
+          className={`absolute -bottom-[255px] left-1/2 -translate-x-1/2 w-[340px] h-[340px] rounded-full pointer-events-auto cursor-grab shadow-[inset_0_5px_20px_rgba(255,255,255,0.05),0_15px_30px_rgba(0,0,0,0.9)] border-[2px] ${isDark ? 'bg-[#0F2942] border-[rgba(255,255,255,0.1)]' : 'bg-gray-200 border-black/10 shadow-[inset_0_5px_20px_rgba(0,0,0,0.05),0_15px_30px_rgba(0,0,0,0.2)]'}`}
           style={{ originX: 0.5, originY: 0.5 }}
         >
           {/* Inner Ring Detail */}
-          <div className="absolute inset-[25px] rounded-full border border-[#1E3A5F] shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)] pointer-events-none"></div>
+          <div className={`absolute inset-[25px] rounded-full border shadow-[inset_0_1px_3px_rgba(0,0,0,0.3)] pointer-events-none ${isDark ? 'border-[#1E3A5F]' : 'border-gray-300'}`}></div>
 
           {/* Render Actual Nav Links in a 360-degree perfect loop */}
           {navLinks.map((link, i) => {
@@ -170,7 +182,7 @@ export default function Navbar() {
                 }}
               >
                 <div
-                  className="w-[46px] h-[46px] mx-auto mt-[16px] rounded-full bg-[#020817] shadow-[inset_0_4px_10px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.05)] border border-[#2C5282] flex items-center justify-center transition-transform active:scale-90"
+                  className={`w-[46px] h-[46px] mx-auto mt-[16px] rounded-full border flex items-center justify-center transition-transform active:scale-90 ${isDark ? 'bg-[#020817] shadow-[inset_0_4px_10px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.05)] border-[#2C5282]' : 'bg-white shadow-[inset_0_2px_5px_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.1)] border-gray-300'}`}
                   onClick={() => navigate(link.path)}
                 >
                   {/* Icon has no internal counter-rotation, meaning it naturally stays upright when it reaches the top (0 degrees) */}
@@ -178,7 +190,7 @@ export default function Navbar() {
                     className={`transition-colors duration-300 ${
                       safeActiveIndex === i
                         ? "text-[#3B82F6] drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-                        : "text-[#E8F1F5] opacity-50"
+                        : isDark ? "text-[#E8F1F5] opacity-50" : "text-gray-600 opacity-70"
                     }`}
                   >
                     {link.icon}

@@ -1,6 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import resumePDF from "../resume.pdf";
 
 export default function Home() {
+  const { isDark } = useTheme();
+
   return (
     <>
       <style>{`
@@ -17,10 +22,10 @@ export default function Home() {
           --color-primary: #2563EB;
           --color-secondary: #6366F1;
           --color-accent: #3B82F6;
-          --color-darker-bg: #000000;
-          --color-card-bg: rgba(9, 14, 23, 0.85);
-          --color-card-border: rgba(255, 255, 255, 0.08);
-          --color-light-text: #F8FAFC;
+          --color-darker-bg: ${isDark ? "#000000" : "#F9FAFB"};
+          --color-card-bg: ${isDark ? "rgba(9, 14, 23, 0.85)" : "rgba(255, 255, 255, 0.85)"};
+          --color-card-border: ${isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.08)"};
+          --color-light-text: ${isDark ? "#F8FAFC" : "#1A202C"};
           --font-display: "Space Grotesk", sans-serif;
           --font-mono: "JetBrains Mono", monospace;
           --font-body: "Inter", sans-serif;
@@ -43,7 +48,7 @@ export default function Home() {
         }
 
         .portfolio-wrapper {
-          width: 100vw;
+          width: 100%;
           height: 100vh;
           background-color: var(--color-darker-bg);
           color: var(--color-light-text);
@@ -51,8 +56,12 @@ export default function Home() {
           display: flex;
           align-items: center;
           justify-content: center;
-          overflow: hidden;
-          position: relative;
+          overflow: hidden !important;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
         }
 
         .bg-glow {
@@ -104,7 +113,7 @@ export default function Home() {
         }
 
         .terminal-header {
-          background: linear-gradient(to bottom, #1e293b, #0f172a);
+          background: ${isDark ? "linear-gradient(to bottom, #1e293b, #0f172a)" : "linear-gradient(to bottom, #f1f5f9, #e2e8f0)"};
           padding: clamp(10px, 1.5vh, 16px) clamp(14px, 2vw, 24px);
           display: flex;
           align-items: center;
@@ -134,7 +143,7 @@ export default function Home() {
           font-family: var(--font-mono);
           font-size: var(--fs-title);
           font-weight: 500;
-          color: #94A3B8;
+          color: ${isDark ? "#94A3B8" : "#475569"};
           letter-spacing: 0.3px;
           overflow: hidden;
           white-space: nowrap;
@@ -185,7 +194,7 @@ export default function Home() {
           font-weight: 800;
           margin: 0 0 var(--gap-section) 0;
           line-height: 1.05;
-          background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%);
+          background: ${isDark ? "linear-gradient(135deg, #ffffff 0%, #a5b4fc 100%)" : "linear-gradient(135deg, #1e293b 0%, #2563eb 100%)"};
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -196,7 +205,7 @@ export default function Home() {
 
         .roles {
           font-size: var(--fs-roles);
-          color: #94a3b8;
+          color: ${isDark ? "#94a3b8" : "#475569"};
           font-weight: 500;
           margin-bottom: var(--gap-section);
           font-family: var(--font-display);
@@ -206,7 +215,7 @@ export default function Home() {
         .description {
           font-size: var(--fs-desc);
           line-height: 1.7;
-          color: #cbd5e1;
+          color: ${isDark ? "#cbd5e1" : "#334155"};
           max-width: 680px;
           margin-bottom: calc(var(--gap-section) * 1.6);
         }
@@ -232,14 +241,14 @@ export default function Home() {
         }
 
         .btn-secondary {
-          background-color: rgba(255, 255, 255, 0.05);
+          background-color: ${isDark ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"};
           color: var(--color-light-text);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid ${isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"};
           backdrop-filter: blur(10px);
         }
         .btn-secondary:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-          border-color: rgba(255, 255, 255, 0.2);
+          background-color: ${isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"};
+          border-color: ${isDark ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.2)"};
           transform: translateY(-2px);
         }
 
@@ -396,7 +405,9 @@ export default function Home() {
                 <div className="dot yellow"></div>
                 <div className="dot green"></div>
               </div>
-              <div className="terminal-title">Welcome to my world</div>
+              <div className="terminal-title">
+                $ phanikumar/portfolio/terminal
+              </div>
             </div>
 
             <div className="terminal-body">
@@ -408,19 +419,26 @@ export default function Home() {
               <h1 className="hero-name">K.V.K. Phani Kumar</h1>
 
               <div className="roles">
-                Full-Stack Developer&nbsp;•&nbsp;Software
-                Engineer&nbsp;•&nbsp;UI/UX Enthusiast
+                Full-Stack Developer&nbsp;&nbsp;&nbsp;•&nbsp;Software
+                Engineer&nbsp;&nbsp;&nbsp;•&nbsp;ML Engineer
               </div>
 
               <p className="description">
-                I build scalable web applications, craft intuitive user
-                interfaces, and turn complex problems into elegant code.
-                Currently pursuing my B.Tech in CSE, I specialize in the modern
-                stack, creating tools and platforms that make an impact.
+                I'm a passionate software developer with a knack for crafting
+                elegant solutions. With experience in full-stack development and
+                machine learning, I thrive on turning complex problems into
+                seamless digital experiences. Let's build something amazing
+                together!
               </p>
 
               <div className="action-buttons">
-                <button className="btn btn-secondary">
+                <a
+                  href={resumePDF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                  style={{ textDecoration: "none" }}
+                >
                   <span
                     className="material-symbols-outlined"
                     aria-hidden="true"
@@ -428,8 +446,12 @@ export default function Home() {
                     description
                   </span>
                   View Resume
-                </button>
-                <button className="btn btn-primary">
+                </a>
+                <Link
+                  to="/got-project"
+                  className="btn btn-primary"
+                  style={{ textDecoration: "none" }}
+                >
                   <span
                     className="material-symbols-outlined"
                     aria-hidden="true"
@@ -437,7 +459,7 @@ export default function Home() {
                     rocket_launch
                   </span>
                   Got a project?
-                </button>
+                </Link>
               </div>
             </div>
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 import "../styles/materialIcons.css";
 
 const skillsData = [
@@ -285,6 +286,7 @@ const skillsData = [
 ];
 
 export default function Skills() {
+  const { isDark } = useTheme();
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [filteredSkills, setFilteredSkills] = useState(skillsData);
@@ -353,7 +355,7 @@ export default function Skills() {
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold mb-4 text-white"
+          className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
         >
           &lt;/ My <span className="text-blue-500">Tech Stack</span> &gt;
         </motion.h1>
@@ -361,7 +363,7 @@ export default function Skills() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-gray-400 max-w-2xl mx-auto text-lg"
+          className={`max-w-2xl mx-auto text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
         >
           Showcasing my expertise across various technologies, frameworks, and
           programming languages with proficiency levels and detailed insights.
@@ -372,8 +374,7 @@ export default function Skills() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-12 backdrop-blur-md"
+        className={`border rounded-2xl p-6 mb-12 backdrop-blur-md ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10 shadow-sm'}`}
       >
         {/* Search Bar & Mobile Filter Button */}
         <div className="flex gap-3 mb-2 md:mb-0">
@@ -382,16 +383,13 @@ export default function Skills() {
             <input
               type="text"
               placeholder="Search skills (e.g., Python, React, Database...)"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-black/30 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+              className={`w-full border rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-blue-500 transition-colors ${isDark ? 'bg-black/30 border-white/10 text-white placeholder-gray-500' : 'bg-white border-black/10 text-gray-900 placeholder-gray-400 shadow-sm'}`}
             />
           </div>
 
           {/* Mobile Filter Trigger */}
           <button
-            onClick={() => setIsFilterModalOpen(true)}
-            className="md:hidden flex items-center justify-center w-12 bg-black/30 border border-white/10 rounded-xl text-blue-500 hover:bg-white/10 transition-colors"
+            className={`md:hidden flex items-center justify-center w-12 border rounded-xl text-blue-500 transition-colors ${isDark ? 'bg-black/30 border-white/10 hover:bg-white/10' : 'bg-white border-black/10 hover:bg-black/5 shadow-sm'}`}
           >
             <span className="material-icons">filter_list</span>
           </button>
@@ -406,7 +404,9 @@ export default function Skills() {
               className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
                 activeFilter === cat.id
                   ? "bg-blue-600 text-white shadow-lg scale-105"
-                  : "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                  : isDark
+                  ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                  : "bg-white text-gray-700 hover:bg-gray-100 border border-black/10 shadow-sm"
               }`}
             >
               {cat.label}
@@ -433,19 +433,17 @@ export default function Skills() {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 left-0 right-0 bg-[#111] border-t border-white/10 p-6 rounded-t-3xl z-50 md:hidden max-h-[85vh] flex flex-col"
+              className={`fixed bottom-0 left-0 right-0 border-t p-6 rounded-t-3xl z-50 md:hidden max-h-[85vh] flex flex-col ${isDark ? 'bg-[#111] border-white/10' : 'bg-white border-black/10'}`}
             >
               <div className="flex justify-between items-center mb-6 shrink-0">
-                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <h3 className={`text-xl font-bold flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                   <span className="material-icons text-blue-500">
                     filter_list
                   </span>
                   Filters
                 </h3>
                 <button
-                  onClick={() => setIsFilterModalOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-gray-400 hover:text-white transition-colors"
+                  className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${isDark ? 'bg-white/10 text-gray-400 hover:text-white' : 'bg-black/5 text-gray-600 hover:text-black'}`}
                 >
                   <span className="material-icons text-sm">close</span>
                 </button>
@@ -462,7 +460,9 @@ export default function Skills() {
                     className={`px-4 py-3 rounded-xl transition-all duration-300 font-medium text-left flex justify-between items-center ${
                       activeFilter === cat.id
                         ? "bg-blue-600 text-white"
-                        : "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                        : isDark
+                        ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                        : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-black/10"
                     }`}
                   >
                     {cat.label}
@@ -488,18 +488,16 @@ export default function Skills() {
               key={skill.name}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300 group hover:-translate-y-2"
+              className={`border rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-2 ${isDark ? 'bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-white/10' : 'bg-white border-black/10 hover:border-blue-500/50 shadow-sm'}`}
             >
-              {/* Header */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 bg-black/40 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className={`w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${isDark ? 'bg-black/40' : 'bg-gray-100'}`}>
                   <span className="material-icons text-3xl text-blue-500">
                     {skill.icon}
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">{skill.name}</h3>
+                  <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{skill.name}</h3>
                   <p className="text-sm text-blue-400 capitalize">
                     {skill.category}
                   </p>
@@ -507,7 +505,7 @@ export default function Skills() {
               </div>
 
               {/* Description */}
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 {skill.description}
               </p>
             </motion.div>
@@ -520,8 +518,8 @@ export default function Skills() {
           className="text-center py-12"
         >
           <i className="fas fa-search-minus text-4xl text-blue-500 mb-4 block"></i>
-          <h3 className="text-xl font-bold text-white mb-2">No skills found</h3>
-          <p className="text-gray-400">
+          <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>No skills found</h3>
+          <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             Try adjusting your search terms or filters
           </p>
         </motion.div>
@@ -543,13 +541,12 @@ export default function Skills() {
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 + index * 0.1 }}
-              className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all"
+              className={`border rounded-xl p-6 transition-all ${isDark ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-black/10 hover:bg-gray-50 shadow-sm'}`}
             >
               <div className="text-4xl font-bold text-blue-500 mb-2">
                 {stat.value}
               </div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
+              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{stat.label}</div>
             </motion.div>
           ))}
         </div>
