@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
-import { Globe, BrainCircuit, Wrench, Server, Users, Rocket, Send } from "lucide-react";
+import {
+  Globe,
+  BrainCircuit,
+  Wrench,
+  Server,
+  Users,
+  Rocket,
+  Send,
+  Search,
+  Cpu,
+  Database,
+} from "lucide-react";
 
 export default function GotProject() {
   const { isDark } = useTheme();
-  
+
   const [formData, setFormData] = useState({
     email: "",
     title: "",
@@ -21,16 +32,18 @@ export default function GotProject() {
 
   const handleSendEmail = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`New Project Inquiry: ${formData.title}`);
+    const subject = encodeURIComponent(
+      `New Project Inquiry: ${formData.title}`,
+    );
     const body = encodeURIComponent(
       `Hello K.V.K. Phani Kumar,\n\n` +
-      `I have a new project inquiry. Here are the details:\n\n` +
-      `Project Title: ${formData.title}\n` +
-      `Client Email: ${formData.email}\n` +
-      `Budget Range: $${formData.budget}\n` +
-      `Team Size: ${formData.teamSize || 'Not specified'}\n\n` +
-      `Project Description:\n${formData.description}\n\n` +
-      `Best regards,`
+        `I have a new project inquiry. Here are the details:\n\n` +
+        `Project Title: ${formData.title}\n` +
+        `Client Email: ${formData.email}\n` +
+        `Budget Range: $${formData.budget}\n` +
+        `Team Size: ${formData.teamSize || "Not specified"}\n\n` +
+        `Project Description:\n${formData.description}\n\n` +
+        `Best regards,`,
     );
     const mailtoLink = `mailto:phanikumark715@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
@@ -42,6 +55,9 @@ export default function GotProject() {
     { title: "Website Maintenance", icon: <Wrench size={24} /> },
     { title: "Deploying Systems", icon: <Server size={24} /> },
     { title: "Collaboration with Team", icon: <Users size={24} /> },
+    { title: "Web Scraping", icon: <Search size={24} /> },
+    { title: "API Development", icon: <Cpu size={24} /> },
+    { title: "Database Design", icon: <Database size={24} /> },
   ];
 
   const containerVariants = {
@@ -55,7 +71,9 @@ export default function GotProject() {
   };
 
   return (
-    <div className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${isDark ? '' : 'bg-gray-50/30'}`}>
+    <div
+      className={`min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 ${isDark ? "" : "bg-gray-50/30"}`}
+    >
       <motion.div
         className="max-w-7xl mx-auto"
         variants={containerVariants}
@@ -63,21 +81,36 @@ export default function GotProject() {
         animate="visible"
       >
         <div className="text-center mb-16">
-          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-4">
-            <Rocket size={40} className={isDark ? "text-blue-400" : "text-blue-600"} />
-            <h1 className={`text-4xl sm:text-5xl font-bold font-display ${isDark ? "text-white" : "text-gray-900"}`}>
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center justify-center gap-3 mb-4"
+          >
+            <Rocket
+              size={40}
+              className={isDark ? "text-blue-400" : "text-blue-600"}
+            />
+            <h1
+              className={`text-4xl sm:text-5xl font-bold font-display ${isDark ? "text-white" : "text-gray-900"}`}
+            >
               Got a Project?
             </h1>
           </motion.div>
-          <motion.p variants={itemVariants} className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-            Let's turn your ideas into reality. Whether you need a web application, machine learning model, or system deployment, I'm here to help.
+          <motion.p
+            variants={itemVariants}
+            className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"}`}
+          >
+            Let's turn your ideas into reality. Whether you need a web
+            application, machine learning model, or system deployment, I'm here
+            to help.
           </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Services Section */}
           <motion.div variants={itemVariants} className="space-y-8">
-            <h2 className={`text-3xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}>
+            <h2
+              className={`text-3xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}
+            >
               My Services
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -90,10 +123,14 @@ export default function GotProject() {
                       : "bg-white border-black/10 hover:border-blue-500/50 shadow-sm"
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${isDark ? "bg-blue-500/20 text-blue-400" : "bg-blue-100 text-blue-600"}`}>
+                  <div
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${isDark ? "bg-blue-500/20 text-blue-400" : "bg-blue-100 text-blue-600"}`}
+                  >
                     {service.icon}
                   </div>
-                  <h3 className={`font-semibold ${isDark ? "text-white" : "text-gray-900"}`}>
+                  <h3
+                    className={`font-semibold ${isDark ? "text-white" : "text-gray-900"}`}
+                  >
                     {service.title}
                   </h3>
                 </div>
@@ -110,14 +147,18 @@ export default function GotProject() {
                 : "bg-white border-blue-200 shadow-xl"
             }`}
           >
-            <h2 className={`text-2xl font-bold mb-6 ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+            <h2
+              className={`text-2xl font-bold mb-6 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+            >
               Project Details
             </h2>
-            
+
             <form onSubmit={handleSendEmail} className="space-y-6">
               {/* Email */}
               <div>
-                <label className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+                <label
+                  className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   Your Email ID
                 </label>
                 <input
@@ -137,7 +178,9 @@ export default function GotProject() {
 
               {/* Title */}
               <div>
-                <label className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+                <label
+                  className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   Project Title
                 </label>
                 <input
@@ -157,7 +200,9 @@ export default function GotProject() {
 
               {/* Description */}
               <div>
-                <label className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+                <label
+                  className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   Project Description
                 </label>
                 <textarea
@@ -177,7 +222,9 @@ export default function GotProject() {
 
               {/* Budget Range */}
               <div>
-                <label className={`block font-semibold mb-2 flex justify-between ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+                <label
+                  className={`block font-semibold mb-2 flex justify-between ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   <span>Budget Range (USD)</span>
                   <span className={isDark ? "text-white" : "text-gray-900"}>
                     ${Number(formData.budget).toLocaleString()}
@@ -193,7 +240,9 @@ export default function GotProject() {
                   onChange={handleInputChange}
                   className="w-full accent-blue-500 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
-                <div className={`flex justify-between text-xs mt-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}>
+                <div
+                  className={`flex justify-between text-xs mt-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}
+                >
                   <span>$500</span>
                   <span>$50,000+</span>
                 </div>
@@ -201,7 +250,9 @@ export default function GotProject() {
 
               {/* Team Size */}
               <div>
-                <label className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}>
+                <label
+                  className={`block font-semibold mb-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   Team Size (Optional)
                 </label>
                 <input
