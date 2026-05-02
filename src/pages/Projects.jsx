@@ -5,8 +5,8 @@ import { useTheme } from "../context/ThemeContext";
 
 const projects = [
   {
-    name: "AI Powered Industrial Management System",
-    description: "AI hub for industries and bussinesses",
+    name: "AIIMS",
+    description: "AI Powered Industrial & Bussiness Management System",
     featured: true,
     technologies: [
       "Full-Stack Web Development",

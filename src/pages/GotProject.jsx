@@ -16,6 +16,7 @@ import {
 
 export default function GotProject() {
   const { isDark } = useTheme();
+  const [currency, setCurrency] = useState("USD");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -35,12 +36,13 @@ export default function GotProject() {
     const subject = encodeURIComponent(
       `New Project Inquiry: ${formData.title}`,
     );
+    const currencySymbol = currency === "USD" ? "$" : "₹";
     const body = encodeURIComponent(
       `Hello K.V.K. Phani Kumar,\n\n` +
         `I have a new project inquiry. Here are the details:\n\n` +
         `Project Title: ${formData.title}\n` +
         `Client Email: ${formData.email}\n` +
-        `Budget Range: $${formData.budget}\n` +
+        `Budget Range: ${currencySymbol}${formData.budget} (${currency})\n` +
         `Team Size: ${formData.teamSize || "Not specified"}\n\n` +
         `Project Description:\n${formData.description}\n\n` +
         `Best regards,`,
@@ -222,20 +224,64 @@ export default function GotProject() {
 
               {/* Budget Range */}
               <div>
-                <label
+                <div className="flex justify-between items-center mb-4">
+                  <label
+                    className={`font-semibold ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                  >
+                    Budget Range
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCurrency("USD")}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        currency === "USD"
+                          ? isDark
+                            ? "bg-blue-600 text-white"
+                            : "bg-blue-600 text-white"
+                          : isDark
+                            ? "bg-white/10 text-gray-300 hover:bg-white/20"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      }`}
+                    >
+                      USD ($)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCurrency("INR")}
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        currency === "INR"
+                          ? isDark
+                            ? "bg-blue-600 text-white"
+                            : "bg-blue-600 text-white"
+                          : isDark
+                            ? "bg-white/10 text-gray-300 hover:bg-white/20"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      }`}
+                    >
+                      INR (₹)
+                    </button>
+                  </div>
+                </div>
+                <div
                   className={`block font-semibold mb-2 flex justify-between ${isDark ? "text-blue-400" : "text-blue-600"}`}
                 >
-                  <span>Budget Range (USD)</span>
-                  <span className={isDark ? "text-white" : "text-gray-900"}>
-                    ${Number(formData.budget).toLocaleString()}
+                  <span>
+                    {currency === "USD"
+                      ? "Budget Range (USD)"
+                      : "Budget Range (INR)"}
                   </span>
-                </label>
+                  <span className={isDark ? "text-white" : "text-gray-900"}>
+                    {currency === "USD" ? "$" : "₹"}
+                    {Number(formData.budget).toLocaleString()}
+                  </span>
+                </div>
                 <input
                   type="range"
                   name="budget"
-                  min="500"
-                  max="50000"
-                  step="500"
+                  min={currency === "USD" ? "500" : "5000"}
+                  max={currency === "USD" ? "50000" : "500000"}
+                  step={currency === "USD" ? "500" : "5000"}
                   value={formData.budget}
                   onChange={handleInputChange}
                   className="w-full accent-blue-500 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
@@ -243,8 +289,8 @@ export default function GotProject() {
                 <div
                   className={`flex justify-between text-xs mt-2 ${isDark ? "text-gray-400" : "text-gray-500"}`}
                 >
-                  <span>$500</span>
-                  <span>$50,000+</span>
+                  <span>{currency === "USD" ? "$500" : "₹5,000"}</span>
+                  <span>{currency === "USD" ? "$50,000+" : "₹500,000+"}</span>
                 </div>
               </div>
 

@@ -9,7 +9,8 @@ const skillsData = [
     category: "programming language",
     level: "Intermediate",
     percentage: 70,
-    icon: "terminal",
+    icon: "code",
+    iconType: "fontawesome",
     description:
       "Foundational knowledge of low-level programming, memory management, and embedded systems using the C language.",
   },
@@ -18,7 +19,8 @@ const skillsData = [
     category: "programming language",
     level: "Intermediate",
     percentage: 78,
-    icon: "code",
+    icon: "plus",
+    iconType: "fontawesome",
     description:
       "Strong grasp of OOP principles, STL, and algorithmic problem-solving using C++, especially for systems and competitive programming.",
   },
@@ -27,7 +29,9 @@ const skillsData = [
     category: "programming language",
     level: "Advanced",
     percentage: 90,
-    icon: "language",
+    icon: "python",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Proficient in scripting, backend development, data analysis, and automation with Python. Experienced with scientific computing and simulations.",
   },
@@ -36,7 +40,9 @@ const skillsData = [
     category: "frontend",
     level: "Advanced",
     percentage: 95,
-    icon: "language",
+    icon: "html5",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Expert in semantic HTML5, accessibility best practices, and modern web standards for structuring web content.",
   },
@@ -45,7 +51,9 @@ const skillsData = [
     category: "frontend",
     level: "Advanced",
     percentage: 90,
-    icon: "style",
+    icon: "css3-alt",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Advanced CSS3 skills including Flexbox, Grid, animations, responsive design, and modern layout techniques.",
   },
@@ -54,7 +62,9 @@ const skillsData = [
     category: "programming language",
     level: "Advanced",
     percentage: 88,
-    icon: "language",
+    icon: "square-js",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Expert in modern JavaScript ES6+, DOM manipulation, async programming, and building interactive web applications.",
   },
@@ -63,7 +73,9 @@ const skillsData = [
     category: "programming language",
     level: "Intermediate",
     percentage: 75,
-    icon: "language",
+    icon: "java",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Solid understanding of OOP principles, data structures, and enterprise application development with Java.",
   },
@@ -72,7 +84,9 @@ const skillsData = [
     category: "frontend",
     level: "Basics",
     percentage: 75,
-    icon: "settings",
+    icon: "react",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Proficient in React hooks, component lifecycle, state management, and building scalable single-page applications.",
   },
@@ -81,7 +95,8 @@ const skillsData = [
     category: "framework",
     level: "Intermediate",
     percentage: 75,
-    icon: "call_split",
+    icon: "file-code",
+    iconType: "fontawesome",
     description:
       "Experienced with jQuery for DOM manipulation, event handling, and AJAX requests in web applications.",
   },
@@ -90,7 +105,9 @@ const skillsData = [
     category: "framework",
     level: "Advanced",
     percentage: 88,
-    icon: "widgets",
+    icon: "bootstrap",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Expert in Bootstrap framework for rapid responsive web development and component-based UI design.",
   },
@@ -99,7 +116,8 @@ const skillsData = [
     category: "framework",
     level: "Intermediate",
     percentage: 80,
-    icon: "palette",
+    icon: "wind",
+    iconType: "fontawesome",
     description:
       "Proficient in utility-first CSS framework for building custom designs rapidly and efficiently.",
   },
@@ -109,6 +127,7 @@ const skillsData = [
     level: "Intermediate",
     percentage: 80,
     icon: "star",
+    iconType: "fontawesome",
     description:
       "Expert at using the Font Awesome library to create a highly iconic look with a wide range of icons, delivering a sleek, polished user interface",
   },
@@ -117,7 +136,9 @@ const skillsData = [
     category: "backend",
     level: "Advanced",
     percentage: 85,
-    icon: "dns",
+    icon: "python",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Experience building robust web applications with Django's MVC architecture, ORM, and admin customization.",
   },
@@ -126,7 +147,9 @@ const skillsData = [
     category: "backend",
     level: "Intermediate",
     percentage: 78,
-    icon: "local_fire_department",
+    icon: "flask",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Skilled in lightweight Python web framework for building APIs and microservices with custom architecture.",
   },
@@ -135,7 +158,9 @@ const skillsData = [
     category: "backend",
     level: "Intermediate",
     percentage: 75,
-    icon: "lan",
+    icon: "node-js",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Competent in server-side JavaScript development, building REST APIs, and working with npm ecosystem.",
   },
@@ -144,7 +169,8 @@ const skillsData = [
     category: "database",
     level: "Advanced",
     percentage: 88,
-    icon: "storage",
+    icon: "database",
+    iconType: "fontawesome",
     description:
       "Expert in writing complex queries, database design, optimization, and working with relational databases.",
   },
@@ -154,6 +180,7 @@ const skillsData = [
     level: "Intermediate",
     percentage: 80,
     icon: "database",
+    iconType: "fontawesome",
     description:
       "Experienced with lightweight database for development, testing, and small-scale applications.",
   },
@@ -162,7 +189,9 @@ const skillsData = [
     category: "devops",
     level: "Advanced",
     percentage: 90,
-    icon: "source_control",
+    icon: "git",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Expert in version control, branching strategies, merge conflict resolution, and collaborative development workflows.",
   },
@@ -171,7 +200,9 @@ const skillsData = [
     category: "devops",
     level: "Advanced",
     percentage: 88,
-    icon: "hub",
+    icon: "github",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Proficient in repository management, CI/CD workflows, project collaboration, and GitHub Actions.",
   },
@@ -181,6 +212,7 @@ const skillsData = [
     level: "Beginner",
     percentage: 60,
     icon: "cloud",
+    iconType: "fontawesome",
     description:
       "Basic understanding of Microsoft Azure cloud services and deployment strategies.",
   },
@@ -189,7 +221,9 @@ const skillsData = [
     category: "devops",
     level: "Intermediate",
     percentage: 75,
-    icon: "dashboard",
+    icon: "docker",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Competent in containerizing applications, creating Dockerfiles, and managing container orchestration.",
   },
@@ -198,7 +232,8 @@ const skillsData = [
     category: "ml",
     level: "Advanced",
     percentage: 85,
-    icon: "calculate",
+    icon: "calculator",
+    iconType: "fontawesome",
     description:
       "Expert in numerical computing, array operations, and mathematical functions for scientific applications.",
   },
@@ -207,7 +242,8 @@ const skillsData = [
     category: "ml",
     level: "Advanced",
     percentage: 88,
-    icon: "table_chart",
+    icon: "table",
+    iconType: "fontawesome",
     description:
       "Proficient in data manipulation, analysis, and cleaning using pandas DataFrames and Series.",
   },
@@ -216,7 +252,8 @@ const skillsData = [
     category: "ml",
     level: "Intermediate",
     percentage: 80,
-    icon: "bar_chart",
+    icon: "chart-bar",
+    iconType: "fontawesome",
     description:
       "Skilled in creating comprehensive data visualizations, plots, and charts for data analysis.",
   },
@@ -225,16 +262,38 @@ const skillsData = [
     category: "ml",
     level: "Intermediate",
     percentage: 78,
-    icon: "search",
+    icon: "magnifying-glass",
+    iconType: "fontawesome",
     description:
       "Experienced in web scraping, HTML parsing, and data extraction from web pages.",
+  },
+  {
+    name: "TensorFlow",
+    category: "ml",
+    level: "Intermediate",
+    percentage: 75,
+    icon: "brain",
+    iconType: "fontawesome",
+    description:
+      "Proficient in building and training deep learning models using TensorFlow and Keras for neural network applications.",
+  },
+  {
+    name: "Scikit-learn",
+    category: "ml",
+    level: "Advanced",
+    percentage: 85,
+    icon: "microchip",
+    iconType: "fontawesome",
+    description:
+      "Expert in machine learning algorithms, classification, regression, clustering, and model evaluation using scikit-learn.",
   },
   {
     name: "AJAX",
     category: "framework",
     level: "Intermediate",
     percentage: 75,
-    icon: "swap_horiz",
+    icon: "arrow-right-arrow-left",
+    iconType: "fontawesome",
     description:
       "Proficient in asynchronous web requests, dynamic content loading, and creating responsive user interfaces.",
   },
@@ -243,7 +302,9 @@ const skillsData = [
     category: "mobile",
     level: "Beginner",
     percentage: 65,
-    icon: "phone_android",
+    icon: "android",
+    iconType: "fontawesome",
+    isBrand: true,
     description:
       "Basic knowledge of Android app development, UI design, and mobile application architecture.",
   },
@@ -252,7 +313,8 @@ const skillsData = [
     category: "tools",
     level: "Intermediate",
     percentage: 80,
-    icon: "send",
+    icon: "paper-plane",
+    iconType: "fontawesome",
     description:
       "Experienced in API testing, debugging, documentation, and automated testing workflows.",
   },
@@ -261,7 +323,8 @@ const skillsData = [
     category: "tools",
     level: "Advanced",
     percentage: 90,
-    icon: "smart_toy",
+    icon: "wand-magic-sparkles",
+    iconType: "fontawesome",
     description:
       "Expert in crafting effective prompts for AI models, understanding AI capabilities, and optimizing AI interactions for various tasks.",
   },
@@ -270,7 +333,8 @@ const skillsData = [
     category: "tools",
     level: "Advanced",
     percentage: 85,
-    icon: "cloud_upload",
+    icon: "cloud-arrow-up",
+    iconType: "fontawesome",
     description:
       "Proficient in deploying and scaling web applications on the Render platform, configuring infrastructure-as-code, managing environments, and optimizing performance.",
   },
@@ -280,6 +344,7 @@ const skillsData = [
     level: "Advanced",
     percentage: 95,
     icon: "code",
+    iconType: "fontawesome",
     description:
       "Expert in using Visual Studio Code for efficient development—customizing extensions, leveraging integrated debugging, remote development, and productivity workflows.",
   },
@@ -355,7 +420,7 @@ export default function Skills() {
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}
+          className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"}`}
         >
           &lt;/ My <span className="text-blue-500">Tech Stack</span> &gt;
         </motion.h1>
@@ -363,7 +428,7 @@ export default function Skills() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className={`max-w-2xl mx-auto text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
+          className={`max-w-2xl mx-auto text-lg ${isDark ? "text-gray-400" : "text-gray-600"}`}
         >
           Showcasing my expertise across various technologies, frameworks, and
           programming languages with proficiency levels and detailed insights.
@@ -374,7 +439,7 @@ export default function Skills() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`border rounded-2xl p-6 mb-12 backdrop-blur-md ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10 shadow-sm'}`}
+        className={`border rounded-2xl p-6 mb-12 backdrop-blur-md ${isDark ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10 shadow-sm"}`}
       >
         {/* Search Bar & Mobile Filter Button */}
         <div className="flex gap-3 mb-2 md:mb-0">
@@ -382,14 +447,17 @@ export default function Skills() {
             <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-500"></i>
             <input
               type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search skills (e.g., Python, React, Database...)"
-              className={`w-full border rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-blue-500 transition-colors ${isDark ? 'bg-black/30 border-white/10 text-white placeholder-gray-500' : 'bg-white border-black/10 text-gray-900 placeholder-gray-400 shadow-sm'}`}
+              className={`w-full border rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-blue-500 transition-colors ${isDark ? "bg-black/30 border-white/10 text-white placeholder-gray-500" : "bg-white border-black/10 text-gray-900 placeholder-gray-400 shadow-sm"}`}
             />
           </div>
 
           {/* Mobile Filter Trigger */}
           <button
-            className={`md:hidden flex items-center justify-center w-12 border rounded-xl text-blue-500 transition-colors ${isDark ? 'bg-black/30 border-white/10 hover:bg-white/10' : 'bg-white border-black/10 hover:bg-black/5 shadow-sm'}`}
+            onClick={() => setIsFilterModalOpen(true)}
+            className={`md:hidden flex items-center justify-center w-12 border rounded-xl text-blue-500 transition-colors ${isDark ? "bg-black/30 border-white/10 hover:bg-white/10" : "bg-white border-black/10 hover:bg-black/5 shadow-sm"}`}
           >
             <span className="material-icons">filter_list</span>
           </button>
@@ -405,8 +473,8 @@ export default function Skills() {
                 activeFilter === cat.id
                   ? "bg-blue-600 text-white shadow-lg scale-105"
                   : isDark
-                  ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-black/10 shadow-sm"
+                    ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                    : "bg-white text-gray-700 hover:bg-gray-100 border border-black/10 shadow-sm"
               }`}
             >
               {cat.label}
@@ -433,17 +501,20 @@ export default function Skills() {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: "100%" }}
-              className={`fixed bottom-0 left-0 right-0 border-t p-6 rounded-t-3xl z-50 md:hidden max-h-[85vh] flex flex-col ${isDark ? 'bg-[#111] border-white/10' : 'bg-white border-black/10'}`}
+              className={`fixed bottom-0 left-0 right-0 border-t p-6 rounded-t-3xl z-50 md:hidden max-h-[85vh] flex flex-col ${isDark ? "bg-[#111] border-white/10" : "bg-white border-black/10"}`}
             >
               <div className="flex justify-between items-center mb-6 shrink-0">
-                <h3 className={`text-xl font-bold flex items-center gap-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <h3
+                  className={`text-xl font-bold flex items-center gap-2 ${isDark ? "text-white" : "text-gray-900"}`}
+                >
                   <span className="material-icons text-blue-500">
                     filter_list
                   </span>
                   Filters
                 </h3>
                 <button
-                  className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${isDark ? 'bg-white/10 text-gray-400 hover:text-white' : 'bg-black/5 text-gray-600 hover:text-black'}`}
+                  onClick={() => setIsFilterModalOpen(false)}
+                  className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${isDark ? "bg-white/10 text-gray-400 hover:text-white" : "bg-black/5 text-gray-600 hover:text-black"}`}
                 >
                   <span className="material-icons text-sm">close</span>
                 </button>
@@ -461,8 +532,8 @@ export default function Skills() {
                       activeFilter === cat.id
                         ? "bg-blue-600 text-white"
                         : isDark
-                        ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
-                        : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-black/10"
+                          ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
+                          : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-black/10"
                     }`}
                   >
                     {cat.label}
@@ -488,16 +559,28 @@ export default function Skills() {
               key={skill.name}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className={`border rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-2 ${isDark ? 'bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-white/10' : 'bg-white border-black/10 hover:border-blue-500/50 shadow-sm'}`}
+              className={`border rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-2 ${isDark ? "bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-white/10" : "bg-white border-black/10 hover:border-blue-500/50 shadow-sm"}`}
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className={`w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${isDark ? 'bg-black/40' : 'bg-gray-100'}`}>
-                  <span className="material-icons text-3xl text-blue-500">
-                    {skill.icon}
-                  </span>
+                <div
+                  className={`w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${isDark ? "bg-black/40" : "bg-gray-100"}`}
+                >
+                  {skill.iconType === "fontawesome" ? (
+                    <i
+                      className={`${skill.isBrand ? "fab" : "fas"} fa-${skill.icon} text-3xl text-blue-500`}
+                    ></i>
+                  ) : (
+                    <span className="material-icons text-3xl text-blue-500">
+                      {skill.icon}
+                    </span>
+                  )}
                 </div>
                 <div>
-                  <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{skill.name}</h3>
+                  <h3
+                    className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}
+                  >
+                    {skill.name}
+                  </h3>
                   <p className="text-sm text-blue-400 capitalize">
                     {skill.category}
                   </p>
@@ -505,7 +588,9 @@ export default function Skills() {
               </div>
 
               {/* Description */}
-              <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              <p
+                className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}
+              >
                 {skill.description}
               </p>
             </motion.div>
@@ -518,8 +603,12 @@ export default function Skills() {
           className="text-center py-12"
         >
           <i className="fas fa-search-minus text-4xl text-blue-500 mb-4 block"></i>
-          <h3 className={`text-xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>No skills found</h3>
-          <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <h3
+            className={`text-xl font-bold mb-2 ${isDark ? "text-white" : "text-gray-900"}`}
+          >
+            No skills found
+          </h3>
+          <p className={`${isDark ? "text-gray-400" : "text-gray-600"}`}>
             Try adjusting your search terms or filters
           </p>
         </motion.div>
@@ -541,12 +630,16 @@ export default function Skills() {
               key={stat.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`border rounded-xl p-6 transition-all ${isDark ? 'bg-white/5 border-white/10 hover:bg-white/10' : 'bg-white border-black/10 hover:bg-gray-50 shadow-sm'}`}
+              className={`border rounded-xl p-6 transition-all ${isDark ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white border-black/10 hover:bg-gray-50 shadow-sm"}`}
             >
               <div className="text-4xl font-bold text-blue-500 mb-2">
                 {stat.value}
               </div>
-              <div className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{stat.label}</div>
+              <div
+                className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
+              >
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </div>
