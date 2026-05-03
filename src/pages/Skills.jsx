@@ -1,649 +1,316 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { useTheme } from "../context/ThemeContext";
-import "../styles/materialIcons.css";
+import { Layout, Server, Cpu, BrainCircuit, Cloud, Layers } from "lucide-react";
 
-const skillsData = [
+const techEcosystem = [
   {
-    name: "C",
-    category: "programming language",
-    level: "Intermediate",
-    percentage: 70,
-    icon: "code",
-    iconType: "fontawesome",
+    category: "MERN Stack",
+    icon: Layers,
     description:
-      "Foundational knowledge of low-level programming, memory management, and embedded systems using the C language.",
+      "Full-stack JavaScript development for modern web applications.",
+    gradient: "from-green-500/20 via-blue-500/10 to-transparent",
+    borderGlow: "group-hover:border-green-400/50",
+    skills: [
+      { name: "MongoDB", slug: "mongodb", hex: "47A248" },
+      { name: "Express.js", slug: "express", hex: "000000" },
+      { name: "React", slug: "react", hex: "61DAFB" },
+      { name: "Node.js", slug: "nodedotjs", hex: "339933" },
+    ],
   },
   {
-    name: "C++",
-    category: "programming language",
-    level: "Intermediate",
-    percentage: 78,
-    icon: "plus",
-    iconType: "fontawesome",
+    category: "Frontend Architecture",
+    icon: Layout,
     description:
-      "Strong grasp of OOP principles, STL, and algorithmic problem-solving using C++, especially for systems and competitive programming.",
+      "Building semantic, responsive, and highly interactive interfaces.",
+    gradient: "from-cyan-500/20 via-blue-500/10 to-transparent",
+    borderGlow: "group-hover:border-blue-400/50",
+    skills: [
+      { name: "JavaScript", slug: "javascript", hex: "F7DF1E" },
+      { name: "HTML5", slug: "html5", hex: "E34F26" },
+      { name: "CSS3", slug: "css3", hex: "1572B6" },
+      { name: "Tailwind", slug: "tailwindcss", hex: "06B6D4" },
+      { name: "Bootstrap", slug: "bootstrap", hex: "7952B3" },
+      { name: "jQuery", slug: "jquery", hex: "0769AD" },
+      { name: "Font Awesome", slug: "fontawesome", hex: "339AF0" },
+      { name: "AJAX", slug: "json", hex: "000000" },
+    ],
   },
   {
-    name: "Python",
-    category: "programming language",
-    level: "Advanced",
-    percentage: 90,
-    icon: "python",
-    iconType: "fontawesome",
-    isBrand: true,
+    category: "Backend & Databases",
+    icon: Server,
     description:
-      "Proficient in scripting, backend development, data analysis, and automation with Python. Experienced with scientific computing and simulations.",
+      "Architecting robust APIs, microservices, and scalable data layers.",
+    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    borderGlow: "group-hover:border-teal-400/50",
+    skills: [
+      { name: "Django", slug: "django", hex: "092E20" },
+      { name: "Flask", slug: "flask", hex: "000000" },
+      { name: "REST API", slug: "swagger", hex: "85EA2D" }, // Swagger logo represents REST API standards
+      { name: "PostgreSQL", slug: "postgresql", hex: "4169E1" },
+      { name: "SQL", slug: "mysql", hex: "4479A1" }, // MySQL logo used as standard representation for SQL
+      { name: "SQLite", slug: "sqlite", hex: "003B57" },
+    ],
   },
   {
-    name: "HTML",
-    category: "frontend",
-    level: "Advanced",
-    percentage: 95,
-    icon: "html5",
-    iconType: "fontawesome",
-    isBrand: true,
+    category: "Core Languages",
+    icon: Cpu,
     description:
-      "Expert in semantic HTML5, accessibility best practices, and modern web standards for structuring web content.",
+      "Low-level processing, object-oriented design, and algorithms.",
+    gradient: "from-purple-500/20 via-pink-500/10 to-transparent",
+    borderGlow: "group-hover:border-purple-400/50",
+    skills: [
+      { name: "Python", slug: "python", hex: "3776AB" },
+      { name: "C++", slug: "cplusplus", hex: "00599C" },
+      { name: "C", slug: "c", hex: "A8B9CC" },
+      { name: "Java", slug: "java", hex: "007396" },
+    ],
   },
   {
-    name: "CSS",
-    category: "frontend",
-    level: "Advanced",
-    percentage: 90,
-    icon: "css3-alt",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Advanced CSS3 skills including Flexbox, Grid, animations, responsive design, and modern layout techniques.",
+    category: "Data Science & ML",
+    icon: BrainCircuit,
+    description: "Numerical computing, data analysis, and predictive models.",
+    gradient: "from-orange-500/20 via-red-500/10 to-transparent",
+    borderGlow: "group-hover:border-orange-400/50",
+    skills: [
+      { name: "TensorFlow", slug: "tensorflow", hex: "FF6F00" },
+      { name: "Scikit-Learn", slug: "scikitlearn", hex: "F7931E" },
+      { name: "NumPy", slug: "numpy", hex: "013243" },
+      { name: "Pandas", slug: "pandas", hex: "150458" },
+      { name: "Matplotlib", slug: "plotly", hex: "3F4F75" },
+      { name: "BeautifulSoup", slug: "python", hex: "3776AB" },
+    ],
   },
   {
-    name: "JavaScript",
-    category: "programming language",
-    level: "Advanced",
-    percentage: 88,
-    icon: "square-js",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Expert in modern JavaScript ES6+, DOM manipulation, async programming, and building interactive web applications.",
-  },
-  {
-    name: "Java",
-    category: "programming language",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "java",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Solid understanding of OOP principles, data structures, and enterprise application development with Java.",
-  },
-  {
-    name: "React",
-    category: "frontend",
-    level: "Basics",
-    percentage: 75,
-    icon: "react",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Proficient in React hooks, component lifecycle, state management, and building scalable single-page applications.",
-  },
-  {
-    name: "jQuery",
-    category: "framework",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "file-code",
-    iconType: "fontawesome",
-    description:
-      "Experienced with jQuery for DOM manipulation, event handling, and AJAX requests in web applications.",
-  },
-  {
-    name: "Bootstrap",
-    category: "framework",
-    level: "Advanced",
-    percentage: 88,
-    icon: "bootstrap",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Expert in Bootstrap framework for rapid responsive web development and component-based UI design.",
-  },
-  {
-    name: "Tailwind CSS",
-    category: "framework",
-    level: "Intermediate",
-    percentage: 80,
-    icon: "wind",
-    iconType: "fontawesome",
-    description:
-      "Proficient in utility-first CSS framework for building custom designs rapidly and efficiently.",
-  },
-  {
-    name: "Font Awesome",
-    category: "framework",
-    level: "Intermediate",
-    percentage: 80,
-    icon: "star",
-    iconType: "fontawesome",
-    description:
-      "Expert at using the Font Awesome library to create a highly iconic look with a wide range of icons, delivering a sleek, polished user interface",
-  },
-  {
-    name: "Django",
-    category: "backend",
-    level: "Advanced",
-    percentage: 85,
-    icon: "python",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Experience building robust web applications with Django's MVC architecture, ORM, and admin customization.",
-  },
-  {
-    name: "Flask",
-    category: "backend",
-    level: "Intermediate",
-    percentage: 78,
-    icon: "flask",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Skilled in lightweight Python web framework for building APIs and microservices with custom architecture.",
-  },
-  {
-    name: "Node.js",
-    category: "backend",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "node-js",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Competent in server-side JavaScript development, building REST APIs, and working with npm ecosystem.",
-  },
-  {
-    name: "SQL",
-    category: "database",
-    level: "Advanced",
-    percentage: 88,
-    icon: "database",
-    iconType: "fontawesome",
-    description:
-      "Expert in writing complex queries, database design, optimization, and working with relational databases.",
-  },
-  {
-    name: "SQLite",
-    category: "database",
-    level: "Intermediate",
-    percentage: 80,
-    icon: "database",
-    iconType: "fontawesome",
-    description:
-      "Experienced with lightweight database for development, testing, and small-scale applications.",
-  },
-  {
-    name: "Git",
-    category: "devops",
-    level: "Advanced",
-    percentage: 90,
-    icon: "git",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Expert in version control, branching strategies, merge conflict resolution, and collaborative development workflows.",
-  },
-  {
-    name: "GitHub",
-    category: "devops",
-    level: "Advanced",
-    percentage: 88,
-    icon: "github",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Proficient in repository management, CI/CD workflows, project collaboration, and GitHub Actions.",
-  },
-  {
-    name: "MS Azure",
-    category: "cloud",
-    level: "Beginner",
-    percentage: 60,
-    icon: "cloud",
-    iconType: "fontawesome",
-    description:
-      "Basic understanding of Microsoft Azure cloud services and deployment strategies.",
-  },
-  {
-    name: "Docker",
-    category: "devops",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "docker",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Competent in containerizing applications, creating Dockerfiles, and managing container orchestration.",
-  },
-  {
-    name: "NumPy",
-    category: "ml",
-    level: "Advanced",
-    percentage: 85,
-    icon: "calculator",
-    iconType: "fontawesome",
-    description:
-      "Expert in numerical computing, array operations, and mathematical functions for scientific applications.",
-  },
-  {
-    name: "Pandas",
-    category: "ml",
-    level: "Advanced",
-    percentage: 88,
-    icon: "table",
-    iconType: "fontawesome",
-    description:
-      "Proficient in data manipulation, analysis, and cleaning using pandas DataFrames and Series.",
-  },
-  {
-    name: "Matplotlib",
-    category: "ml",
-    level: "Intermediate",
-    percentage: 80,
-    icon: "chart-bar",
-    iconType: "fontawesome",
-    description:
-      "Skilled in creating comprehensive data visualizations, plots, and charts for data analysis.",
-  },
-  {
-    name: "BeautifulSoup",
-    category: "ml",
-    level: "Intermediate",
-    percentage: 78,
-    icon: "magnifying-glass",
-    iconType: "fontawesome",
-    description:
-      "Experienced in web scraping, HTML parsing, and data extraction from web pages.",
-  },
-  {
-    name: "TensorFlow",
-    category: "ml",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "brain",
-    iconType: "fontawesome",
-    description:
-      "Proficient in building and training deep learning models using TensorFlow and Keras for neural network applications.",
-  },
-  {
-    name: "Scikit-learn",
-    category: "ml",
-    level: "Advanced",
-    percentage: 85,
-    icon: "microchip",
-    iconType: "fontawesome",
-    description:
-      "Expert in machine learning algorithms, classification, regression, clustering, and model evaluation using scikit-learn.",
-  },
-  {
-    name: "AJAX",
-    category: "framework",
-    level: "Intermediate",
-    percentage: 75,
-    icon: "arrow-right-arrow-left",
-    iconType: "fontawesome",
-    description:
-      "Proficient in asynchronous web requests, dynamic content loading, and creating responsive user interfaces.",
-  },
-  {
-    name: "Android Development",
-    category: "mobile",
-    level: "Beginner",
-    percentage: 65,
-    icon: "android",
-    iconType: "fontawesome",
-    isBrand: true,
-    description:
-      "Basic knowledge of Android app development, UI design, and mobile application architecture.",
-  },
-  {
-    name: "Postman",
-    category: "tools",
-    level: "Intermediate",
-    percentage: 80,
-    icon: "paper-plane",
-    iconType: "fontawesome",
-    description:
-      "Experienced in API testing, debugging, documentation, and automated testing workflows.",
-  },
-  {
-    name: "AI Prompting",
-    category: "tools",
-    level: "Advanced",
-    percentage: 90,
-    icon: "wand-magic-sparkles",
-    iconType: "fontawesome",
-    description:
-      "Expert in crafting effective prompts for AI models, understanding AI capabilities, and optimizing AI interactions for various tasks.",
-  },
-  {
-    name: "Render",
-    category: "tools",
-    level: "Advanced",
-    percentage: 85,
-    icon: "cloud-arrow-up",
-    iconType: "fontawesome",
-    description:
-      "Proficient in deploying and scaling web applications on the Render platform, configuring infrastructure-as-code, managing environments, and optimizing performance.",
-  },
-  {
-    name: "VS Code",
-    category: "tools",
-    level: "Advanced",
-    percentage: 95,
-    icon: "code",
-    iconType: "fontawesome",
-    description:
-      "Expert in using Visual Studio Code for efficient development—customizing extensions, leveraging integrated debugging, remote development, and productivity workflows.",
+    category: "Cloud, DevOps & Mobile",
+    icon: Cloud,
+    description: "Version control, containerization, deployment, and app dev.",
+    gradient: "from-sky-500/20 via-indigo-500/10 to-transparent",
+    borderGlow: "group-hover:border-indigo-400/50",
+    skills: [
+      { name: "Git", slug: "git", hex: "F05032" },
+      { name: "GitHub", slug: "github", hex: "181717" },
+      { name: "Docker", slug: "docker", hex: "2496ED" },
+      { name: "Render", slug: "render", hex: "46E3B7" },
+      { name: "Android Dev", slug: "android", hex: "3DDC84" },
+    ],
   },
 ];
 
 export default function Skills() {
   const { isDark } = useTheme();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [filteredSkills, setFilteredSkills] = useState(skillsData);
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false); // New state for mobile modal
-
-  const categories = [
-    { id: "all", label: "All Skills" },
-    { id: "programming language", label: "Programming Languages" },
-    { id: "frontend", label: "Frontend" },
-    { id: "backend", label: "Backend" },
-    { id: "database", label: "Database" },
-    { id: "framework", label: "Frameworks" },
-    { id: "ml", label: "AI/ML" },
-    { id: "devops", label: "DevOps" },
-    { id: "cloud", label: "Cloud" },
-    { id: "mobile", label: "Mobile" },
-    { id: "tools", label: "Tools" },
-  ];
+  const containerRef = useRef(null);
+  const cardsRef = useRef([]);
+  const iconsRef = useRef([]);
 
   useEffect(() => {
-    const filtered = skillsData.filter((skill) => {
-      const matchesSearch =
-        skill.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        skill.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        skill.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const ctx = gsap.context(() => {
+      // 1. Initial 3D Entrance for Cards
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 100, rotationX: -15, scale: 0.9 },
+        {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power4.out",
+          transformPerspective: 1000,
+        },
+      );
 
-      const matchesFilter =
-        activeFilter === "all" || skill.category === activeFilter;
+      // 2. Staggered pop-in for the individual tech icons
+      gsap.fromTo(
+        iconsRef.current,
+        { opacity: 0, scale: 0 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.015,
+          ease: "back.out(1.7)",
+          delay: 0.5,
+        },
+      );
 
-      return matchesSearch && matchesFilter;
+      // 3. Continuous floating animation for the background elements
+      gsap.to(".floating-blob", {
+        y: "random(-20, 20)",
+        x: "random(-20, 20)",
+        rotation: "random(-10, 10)",
+        duration: "random(3, 5)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.5,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // 3D Tilt Effect on Mouse Move for the Category Cards
+  const handleMouseMove = (e, index) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    gsap.to(card, {
+      rotationX: rotateX,
+      rotationY: rotateY,
+      duration: 0.4,
+      ease: "power2.out",
+      transformPerspective: 1000,
     });
+  };
 
-    setFilteredSkills(filtered);
-  }, [searchTerm, activeFilter]);
-
-  // Prevent background scrolling when modal is open
-  useEffect(() => {
-    if (isFilterModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [isFilterModalOpen]);
-
-  const stats = [
-    { label: "Total Skills", value: skillsData.length },
-    {
-      label: "Advanced Level",
-      value: skillsData.filter((s) => s.level === "Advanced").length,
-    },
-    {
-      label: "Programming Languages",
-      value: skillsData.filter((s) => s.category === "programming language")
-        .length,
-    },
-    {
-      label: "Frameworks & Libraries",
-      value: skillsData.filter((s) => s.category === "framework").length,
-    },
-  ];
+  const handleMouseLeaveCard = (index) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
+    gsap.to(card, {
+      rotationX: 0,
+      rotationY: 0,
+      duration: 0.7,
+      ease: "elastic.out(1, 0.3)",
+    });
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 transition-colors duration-300 bg-transparent">
-      {/* Page Header */}
-      <div className="text-center mb-16">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"}`}
-        >
-          &lt;/ My <span className="text-blue-500">Tech Stack</span> &gt;
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          className={`max-w-2xl mx-auto text-lg ${isDark ? "text-gray-400" : "text-gray-600"}`}
-        >
-          Showcasing my expertise across various technologies, frameworks, and
-          programming languages with proficiency levels and detailed insights.
-        </motion.p>
-      </div>
+    <div
+      className="relative min-h-screen py-24 overflow-hidden perspective-1000"
+      ref={containerRef}
+    >
+      {/* Animated Background Blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl floating-blob pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl floating-blob pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl floating-blob pointer-events-none" />
 
-      {/* Controls Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={`border rounded-2xl p-6 mb-12 backdrop-blur-md ${isDark ? "bg-white/5 border-white/10" : "bg-black/5 border-black/10 shadow-sm"}`}
-      >
-        {/* Search Bar & Mobile Filter Button */}
-        <div className="flex gap-3 mb-2 md:mb-0">
-          <div className="relative flex-1">
-            <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-500"></i>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search skills (e.g., Python, React, Database...)"
-              className={`w-full border rounded-xl pl-12 pr-4 py-3 focus:outline-none focus:border-blue-500 transition-colors ${isDark ? "bg-black/30 border-white/10 text-white placeholder-gray-500" : "bg-white border-black/10 text-gray-900 placeholder-gray-400 shadow-sm"}`}
-            />
-          </div>
-
-          {/* Mobile Filter Trigger */}
-          <button
-            onClick={() => setIsFilterModalOpen(true)}
-            className={`md:hidden flex items-center justify-center w-12 border rounded-xl text-blue-500 transition-colors ${isDark ? "bg-black/30 border-white/10 hover:bg-white/10" : "bg-white border-black/10 hover:bg-black/5 shadow-sm"}`}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header Section */}
+        <div className="text-center mb-24">
+          <h1
+            className={`text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 ${isDark ? "text-white" : "text-slate-900"}`}
           >
-            <span className="material-icons">filter_list</span>
-          </button>
-        </div>
-
-        {/* Desktop Filter Buttons */}
-        <div className="hidden md:flex flex-wrap gap-2 justify-center mt-6">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveFilter(cat.id)}
-              className={`px-4 py-2 rounded-full transition-all duration-300 font-medium text-sm ${
-                activeFilter === cat.id
-                  ? "bg-blue-600 text-white shadow-lg scale-105"
-                  : isDark
-                    ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
-                    : "bg-white text-gray-700 hover:bg-gray-100 border border-black/10 shadow-sm"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Mobile Filter Modal Popup */}
-      <AnimatePresence>
-        {isFilterModalOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsFilterModalOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
-            />
-
-            {/* Modal Drawer */}
-            <motion.div
-              initial={{ opacity: 0, y: "100%" }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: "100%" }}
-              className={`fixed bottom-0 left-0 right-0 border-t p-6 rounded-t-3xl z-50 md:hidden max-h-[85vh] flex flex-col ${isDark ? "bg-[#111] border-white/10" : "bg-white border-black/10"}`}
-            >
-              <div className="flex justify-between items-center mb-6 shrink-0">
-                <h3
-                  className={`text-xl font-bold flex items-center gap-2 ${isDark ? "text-white" : "text-gray-900"}`}
-                >
-                  <span className="material-icons text-blue-500">
-                    filter_list
-                  </span>
-                  Filters
-                </h3>
-                <button
-                  onClick={() => setIsFilterModalOpen(false)}
-                  className={`w-8 h-8 flex items-center justify-center rounded-full transition-colors ${isDark ? "bg-white/10 text-gray-400 hover:text-white" : "bg-black/5 text-gray-600 hover:text-black"}`}
-                >
-                  <span className="material-icons text-sm">close</span>
-                </button>
-              </div>
-
-              <div className="flex flex-col gap-2 overflow-y-auto pb-6 custom-scrollbar">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => {
-                      setActiveFilter(cat.id);
-                      setIsFilterModalOpen(false); // Auto-close modal after selection
-                    }}
-                    className={`px-4 py-3 rounded-xl transition-all duration-300 font-medium text-left flex justify-between items-center ${
-                      activeFilter === cat.id
-                        ? "bg-blue-600 text-white"
-                        : isDark
-                          ? "bg-black/30 text-gray-300 hover:bg-black/50 border border-white/10"
-                          : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-black/10"
-                    }`}
-                  >
-                    {cat.label}
-                    {activeFilter === cat.id && (
-                      <span className="material-icons text-sm">check</span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Skills Grid */}
-      {filteredSkills.length > 0 ? (
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
-        >
-          {filteredSkills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className={`border rounded-2xl p-6 transition-all duration-300 group hover:-translate-y-2 ${isDark ? "bg-white/5 border-white/10 hover:border-blue-500/50 hover:bg-white/10" : "bg-white border-black/10 hover:border-blue-500/50 shadow-sm"}`}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div
-                  className={`w-16 h-16 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform ${isDark ? "bg-black/40" : "bg-gray-100"}`}
-                >
-                  {skill.iconType === "fontawesome" ? (
-                    <i
-                      className={`${skill.isBrand ? "fab" : "fas"} fa-${skill.icon} text-3xl text-blue-500`}
-                    ></i>
-                  ) : (
-                    <span className="material-icons text-3xl text-blue-500">
-                      {skill.icon}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <h3
-                    className={`text-xl font-bold ${isDark ? "text-white" : "text-gray-900"}`}
-                  >
-                    {skill.name}
-                  </h3>
-                  <p className="text-sm text-blue-400 capitalize">
-                    {skill.category}
-                  </p>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p
-                className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-600"}`}
-              >
-                {skill.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-12"
-        >
-          <i className="fas fa-search-minus text-4xl text-blue-500 mb-4 block"></i>
-          <h3
-            className={`text-xl font-bold mb-2 ${isDark ? "text-white" : "text-gray-900"}`}
+            My{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-teal-400 drop-shadow-sm">
+              Tech Ecosystem
+            </span>
+          </h1>
+          <p
+            className={`text-lg md:text-xl max-w-2xl mx-auto font-medium ${isDark ? "text-slate-400" : "text-slate-600"}`}
           >
-            No skills found
-          </h3>
-          <p className={`${isDark ? "text-gray-400" : "text-gray-600"}`}>
-            Try adjusting your search terms or filters
+            The tools, languages, and frameworks I use to architect intelligent
+            and scalable digital solutions.
           </p>
-        </motion.div>
-      )}
-
-      {/* Stats Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="mt-20 text-center"
-      >
-        <h2 className="text-3xl font-bold text-blue-500 mb-8">
-          Skills Overview
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`border rounded-xl p-6 transition-all ${isDark ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white border-black/10 hover:bg-gray-50 shadow-sm"}`}
-            >
-              <div className="text-4xl font-bold text-blue-500 mb-2">
-                {stat.value}
-              </div>
-              <div
-                className={`text-sm ${isDark ? "text-gray-400" : "text-gray-600"}`}
-              >
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
         </div>
-      </motion.div>
+
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-10">
+          {techEcosystem.map((dept, deptIndex) => {
+            const CategoryIcon = dept.icon;
+
+            return (
+              <div
+                key={dept.category}
+                ref={(el) => (cardsRef.current[deptIndex] = el)}
+                onMouseMove={(e) => handleMouseMove(e, deptIndex)}
+                onMouseLeave={() => handleMouseLeaveCard(deptIndex)}
+                className={`group relative overflow-hidden rounded-[2rem] p-6 sm:p-8 md:p-10 transition-colors duration-500 border backdrop-blur-xl ${
+                  isDark
+                    ? "bg-[#0f172a]/70 border-slate-700/50 hover:bg-[#0f172a]/90 shadow-2xl shadow-black/50"
+                    : "bg-white/80 border-slate-200/80 hover:bg-white shadow-xl shadow-slate-200/60"
+                } ${dept.borderGlow}`}
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                {/* Dynamic Background Gradient */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${dept.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0`}
+                />
+
+                <div
+                  className="relative z-10"
+                  style={{ transform: "translateZ(30px)" }}
+                >
+                  {/* Category Header with Icon */}
+                  <div className="flex items-center gap-4 mb-3">
+                    <div
+                      className={`p-3 rounded-xl ${isDark ? "bg-slate-800/80 text-cyan-400" : "bg-blue-50 text-blue-600"} shadow-inner`}
+                    >
+                      <CategoryIcon size={24} strokeWidth={2} />
+                    </div>
+                    <h2
+                      className={`text-xl sm:text-2xl font-bold tracking-tight ${isDark ? "text-slate-100" : "text-slate-800"}`}
+                    >
+                      {dept.category}
+                    </h2>
+                  </div>
+
+                  <p
+                    className={`mb-10 text-sm font-medium pl-1 leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}
+                  >
+                    {dept.description}
+                  </p>
+
+                  {/* Logo Grid */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-y-8 gap-x-2">
+                    {dept.skills.map((skill, skillIndex) => {
+                      // Handle black/dark logos in dark mode (like Express, Flask, JSON)
+                      const iconColor =
+                        isDark &&
+                        (skill.hex === "000000" || skill.hex === "181717")
+                          ? "FFFFFF"
+                          : skill.hex;
+
+                      return (
+                        <div
+                          key={skill.name}
+                          ref={(el) =>
+                            (iconsRef.current[deptIndex * 15 + skillIndex] = el)
+                          }
+                          className="flex flex-col items-center justify-start gap-3 cursor-default"
+                        >
+                          <div className="relative w-12 h-12 flex items-center justify-center">
+                            {/* The SVG Logo */}
+                            <img
+                              src={`https://cdn.simpleicons.org/${skill.slug}/${iconColor}`}
+                              alt={`${skill.name} logo`}
+                              className="w-full h-full object-contain relative z-10 drop-shadow-md"
+                              loading="lazy"
+                              onError={(e) => {
+                                // Fallback for simpleicons error (like for Java)
+                                e.currentTarget.src = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.slug.replace("dotjs", "")}/${skill.slug.replace("dotjs", "")}-original.svg`;
+                              }}
+                            />
+                          </div>
+
+                          {/* Skill Name */}
+                          <span
+                            className={`text-[11px] sm:text-xs font-semibold text-center leading-tight ${
+                              isDark ? "text-slate-400" : "text-slate-500"
+                            }`}
+                          >
+                            {skill.name}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
