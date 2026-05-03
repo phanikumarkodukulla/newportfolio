@@ -16,6 +16,7 @@ const techEcosystem = [
       { name: "Express.js", slug: "express", hex: "000000" },
       { name: "React", slug: "react", hex: "61DAFB" },
       { name: "Node.js", slug: "nodedotjs", hex: "339933" },
+      { name: "Vite", slug: "vite", hex: "646CFF" }, // Added Vite
     ],
   },
   {
@@ -46,9 +47,9 @@ const techEcosystem = [
     skills: [
       { name: "Django", slug: "django", hex: "092E20" },
       { name: "Flask", slug: "flask", hex: "000000" },
-      { name: "REST API", slug: "swagger", hex: "85EA2D" }, // Swagger logo represents REST API standards
+      { name: "REST API", slug: "swagger", hex: "85EA2D" },
       { name: "PostgreSQL", slug: "postgresql", hex: "4169E1" },
-      { name: "SQL", slug: "mysql", hex: "4479A1" }, // MySQL logo used as standard representation for SQL
+      { name: "SQL", slug: "mysql", hex: "4479A1" },
       { name: "SQLite", slug: "sqlite", hex: "003B57" },
     ],
   },
@@ -264,7 +265,7 @@ export default function Skills() {
                   {/* Logo Grid */}
                   <div className="grid grid-cols-3 sm:grid-cols-4 gap-y-8 gap-x-2">
                     {dept.skills.map((skill, skillIndex) => {
-                      // Handle black/dark logos in dark mode (like Express, Flask, JSON)
+                      // Handle black/dark logos in dark mode
                       const iconColor =
                         isDark &&
                         (skill.hex === "000000" || skill.hex === "181717")
@@ -284,10 +285,10 @@ export default function Skills() {
                             <img
                               src={`https://cdn.simpleicons.org/${skill.slug}/${iconColor}`}
                               alt={`${skill.name} logo`}
-                              className="w-full h-full object-contain relative z-10 drop-shadow-md"
+                              // Added Tailwind linear spin specifically for React
+                              className={`w-full h-full object-contain relative z-10 drop-shadow-md ${skill.slug === "react" ? "animate-[spin_5s_linear_infinite]" : ""}`}
                               loading="lazy"
                               onError={(e) => {
-                                // Fallback for simpleicons error (like for Java)
                                 e.currentTarget.src = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.slug.replace("dotjs", "")}/${skill.slug.replace("dotjs", "")}-original.svg`;
                               }}
                             />
