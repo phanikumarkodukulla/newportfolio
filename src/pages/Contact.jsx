@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import { useThemeClasses } from "../context/useThemeClasses";
 
 export default function Contact() {
   const { isDark } = useTheme();
+  const classes = useThemeClasses();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -95,47 +98,62 @@ export default function Contact() {
 
   return (
     <div
-      className={`min-h-screen overflow-hidden relative transition-colors duration-300 ${isDark ? "bg-[#0a0a0a]" : "bg-gradient-to-br from-gray-50 via-white to-gray-100"}`}
+      className="min-h-screen overflow-hidden relative transition-colors duration-300"
+      style={{ backgroundColor: "var(--bg-primary)" }}
     >
-      {/* Animated background glows */}
+      {/* Animated background glows - Responsive */}
       <motion.div
-        className="absolute top-1/4 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        className="absolute top-1/4 left-0 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+        style={{
+          background: isDark ? "#3B82F6" : "#60A5FA",
+        }}
         animate={{ y: [0, 50, 0], x: [0, 30, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute top-1/3 right-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
+        className="absolute top-1/3 right-0 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
+        style={{
+          background: isDark ? "#2563EB" : "#3B82F6",
+        }}
         animate={{ y: [0, -50, 0], x: [0, -30, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
+        className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Header Section */}
+        {/* Header Section - Responsive */}
         <motion.div
           variants={itemVariants}
-          className="text-center mb-16 max-w-2xl"
+          className="text-center mb-8 sm:mb-12 lg:mb-16 w-full max-w-3xl"
         >
-          <h1 className="text-5xl sm:text-6xl font-bold mb-4 text-blue-600">
+          <h1
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4 transition-colors duration-300"
+            style={{ color: "var(--accent-color)" }}
+          >
             Let's Connect
           </h1>
           <p
-            className={`text-lg sm:text-xl ${isDark ? "text-gray-400" : "text-gray-600"}`}
+            className="text-base sm:text-lg md:text-xl px-2 sm:px-4 transition-colors duration-300"
+            style={{ color: "var(--text-secondary)" }}
           >
             Have a question or want to collaborate? I'd love to hear from you!
           </p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="w-full max-w-6xl grid md:grid-cols-2 gap-8 lg:gap-12">
+        {/* Main Content Grid - Responsive */}
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 px-0 sm:px-4">
           {/* Left Side - Contact Methods */}
-          <motion.div variants={itemVariants} className="space-y-6">
+          <motion.div
+            variants={itemVariants}
+            className="space-y-4 sm:space-y-6"
+          >
             <h2
-              className={`text-2xl font-bold mb-8 ${isDark ? "text-white" : "text-gray-900"}`}
+              className="text-xl sm:text-2xl lg:text-3xl font-bold mb-6 sm:mb-8 transition-colors duration-300"
+              style={{ color: "var(--text-primary)" }}
             >
               Contact Information
             </h2>
@@ -144,38 +162,64 @@ export default function Contact() {
               <motion.div
                 key={index}
                 whileHover={{ translateX: 8 }}
-                className={`group relative rounded-2xl p-6 backdrop-blur-lg border transition-all duration-300 cursor-pointer ${
-                  isDark
-                    ? "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20"
-                    : "bg-white/60 border-white/40 hover:bg-white/80 hover:border-white/60 shadow-lg"
-                }`}
+                className="group relative rounded-2xl p-4 sm:p-5 lg:p-6 backdrop-blur-lg border transition-all duration-300 cursor-pointer"
+                style={{
+                  backgroundColor: isDark
+                    ? "rgba(255, 255, 255, 0.05)"
+                    : "rgba(255, 255, 255, 0.6)",
+                  borderColor: isDark
+                    ? "rgba(255, 255, 255, 0.1)"
+                    : "rgba(255, 255, 255, 0.4)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = isDark
+                    ? "rgba(255, 255, 255, 0.1)"
+                    : "rgba(255, 255, 255, 0.8)";
+                  e.currentTarget.style.borderColor = isDark
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "rgba(255, 255, 255, 0.6)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = isDark
+                    ? "rgba(255, 255, 255, 0.05)"
+                    : "rgba(255, 255, 255, 0.6)";
+                  e.currentTarget.style.borderColor = isDark
+                    ? "rgba(255, 255, 255, 0.1)"
+                    : "rgba(255, 255, 255, 0.4)";
+                }}
                 onClick={() => {
                   if (method.link) {
                     window.location.href = method.link;
                   }
                 }}
               >
-                <div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-r opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                  style={{
-                    backgroundImage: `linear-to-r, var(--tw-gradient-stops)`,
-                  }}
-                />
-
-                <div className="relative z-10 flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-xl bg-blue-500/20 border border-blue-500/40 flex items-center justify-center">
+                <div className="relative z-10 flex items-start gap-3 sm:gap-4">
+                  <div
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-all"
+                    style={{
+                      backgroundColor: isDark
+                        ? "rgba(37, 99, 235, 0.2)"
+                        : "rgba(37, 99, 235, 0.15)",
+                      borderColor: isDark
+                        ? "rgba(37, 99, 235, 0.4)"
+                        : "rgba(37, 99, 235, 0.3)",
+                    }}
+                  >
                     <i
-                      className={`${method.isBrand ? "fab" : "fas"} fa-${method.icon} text-lg text-blue-500`}
+                      className={`${method.isBrand ? "fab" : "fas"} fa-${method.icon} text-base sm:text-lg`}
+                      style={{ color: "var(--accent-color)" }}
                     ></i>
                   </div>
-                  <div className="flex-1 pt-1">
+                  <div className="flex-1 pt-0 sm:pt-1 min-w-0">
                     <p
-                      className={`text-sm font-semibold ${isDark ? "text-gray-400" : "text-gray-600"}`}
+                      className="text-xs sm:text-sm font-semibold transition-colors duration-300"
+                      style={{ color: "var(--text-tertiary)" }}
                     >
                       {method.label}
                     </p>
                     <p
-                      className={`font-bold mt-1 transition-colors ${isDark ? "text-white group-hover:text-blue-400" : "text-gray-900 group-hover:text-blue-600"}`}
+                      className="font-bold mt-1 transition-colors duration-300 break-words text-sm sm:text-base"
+                      style={{ color: "var(--text-primary)" }}
                     >
                       {method.value}
                     </p>
@@ -184,38 +228,60 @@ export default function Contact() {
               </motion.div>
             ))}
 
-            {/* Call Button */}
+            {/* Call Button - Responsive */}
             <motion.button
               whileHover={{ scale: 1.02, y: -4 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleCallNow}
-              className="w-full mt-8 px-6 py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-white shadow-lg hover:shadow-blue-600/50 transition-all flex items-center justify-center gap-2 text-lg"
+              className="w-full mt-6 sm:mt-8 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold text-white shadow-lg transition-all text-base sm:text-lg flex items-center justify-center gap-2 flex-shrink-0"
+              style={{
+                backgroundColor: "var(--color-primary)",
+                boxShadow: isDark
+                  ? "0 0 30px rgba(37, 99, 235, 0.3)"
+                  : "0 0 20px rgba(37, 99, 235, 0.2)",
+              }}
             >
               <i className="fas fa-phone"></i>
               Call Now
             </motion.button>
           </motion.div>
 
-          {/* Right Side - Contact Form */}
+          {/* Right Side - Contact Form - Responsive */}
           <motion.div
             variants={itemVariants}
-            className={`rounded-3xl p-8 backdrop-blur-xl border transition-all ${
-              isDark
-                ? "bg-white/5 border-white/10 hover:bg-white/10"
-                : "bg-white/70 border-white/50 shadow-xl"
-            }`}
+            className="rounded-3xl p-4 sm:p-6 lg:p-8 backdrop-blur-xl border transition-all"
+            style={{
+              backgroundColor: isDark
+                ? "rgba(255, 255, 255, 0.05)"
+                : "rgba(255, 255, 255, 0.7)",
+              borderColor: isDark
+                ? "rgba(255, 255, 255, 0.1)"
+                : "rgba(255, 255, 255, 0.5)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = isDark
+                ? "rgba(255, 255, 255, 0.1)"
+                : "rgba(255, 255, 255, 0.8)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = isDark
+                ? "rgba(255, 255, 255, 0.05)"
+                : "rgba(255, 255, 255, 0.7)";
+            }}
           >
             <h2
-              className={`text-2xl font-bold mb-6 ${isDark ? "text-white" : "text-gray-900"}`}
+              className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 transition-colors duration-300"
+              style={{ color: "var(--text-primary)" }}
             >
               Send a Message
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Name Input */}
               <motion.div whileFocus={{ scale: 1.02 }}>
                 <label
-                  className={`block text-sm font-semibold mb-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  className="block text-xs sm:text-sm font-semibold mb-1 sm:mb-2 transition-colors duration-300"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Your Name
                 </label>
@@ -226,18 +292,38 @@ export default function Contact() {
                   onChange={handleFormChange}
                   placeholder="John Doe"
                   required
-                  className={`w-full px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:border-blue-500 ${
-                    isDark
-                      ? "bg-white/10 border-white/20 text-white placeholder-gray-500 focus:bg-white/15"
-                      : "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white"
-                  }`}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 transition-all focus:outline-none text-sm sm:text-base"
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)",
+                    borderColor: isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)",
+                    color: "var(--text-primary)",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--color-primary)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.15)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
                 />
               </motion.div>
 
               {/* Email Input */}
               <motion.div whileFocus={{ scale: 1.02 }}>
                 <label
-                  className={`block text-sm font-semibold mb-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  className="block text-xs sm:text-sm font-semibold mb-1 sm:mb-2 transition-colors duration-300"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Your Email
                 </label>
@@ -248,18 +334,38 @@ export default function Contact() {
                   onChange={handleFormChange}
                   placeholder="your@email.com"
                   required
-                  className={`w-full px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:border-blue-500 ${
-                    isDark
-                      ? "bg-white/10 border-white/20 text-white placeholder-gray-500 focus:bg-white/15"
-                      : "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white"
-                  }`}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 transition-all focus:outline-none text-sm sm:text-base"
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)",
+                    borderColor: isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)",
+                    color: "var(--text-primary)",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--color-primary)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.15)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
                 />
               </motion.div>
 
               {/* Message Input */}
               <motion.div whileFocus={{ scale: 1.02 }}>
                 <label
-                  className={`block text-sm font-semibold mb-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  className="block text-xs sm:text-sm font-semibold mb-1 sm:mb-2 transition-colors duration-300"
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   Message
                 </label>
@@ -270,11 +376,30 @@ export default function Contact() {
                   placeholder="Your message here..."
                   rows="4"
                   required
-                  className={`w-full px-4 py-3 rounded-xl border-2 transition-all focus:outline-none focus:border-blue-500 resize-none ${
-                    isDark
-                      ? "bg-white/10 border-white/20 text-white placeholder-gray-500 focus:bg-white/15"
-                      : "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white"
-                  }`}
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 transition-all focus:outline-none resize-none text-sm sm:text-base"
+                  style={{
+                    backgroundColor: isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)",
+                    borderColor: isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)",
+                    color: "var(--text-primary)",
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--color-primary)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.15)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = isDark
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "rgba(0, 0, 0, 0.1)";
+                    e.target.style.backgroundColor = isDark
+                      ? "rgba(255, 255, 255, 0.1)"
+                      : "rgba(255, 255, 255, 1)";
+                  }}
                 />
               </motion.div>
 
@@ -283,7 +408,13 @@ export default function Contact() {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-white shadow-lg hover:shadow-blue-600/50 transition-all mt-6"
+                className="w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-white shadow-lg transition-all mt-4 sm:mt-6 text-sm sm:text-base"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  boxShadow: isDark
+                    ? "0 0 30px rgba(37, 99, 235, 0.3)"
+                    : "0 0 20px rgba(37, 99, 235, 0.2)",
+                }}
               >
                 Send Message
               </motion.button>
@@ -291,17 +422,23 @@ export default function Contact() {
           </motion.div>
         </div>
 
-        {/* Social Links Section */}
+        {/* Social Links Section - Responsive */}
         <motion.div
           variants={itemVariants}
-          className="mt-16 pt-12 border-t border-white/10 w-full max-w-6xl"
+          className="mt-10 sm:mt-12 lg:mt-16 pt-8 sm:pt-10 lg:pt-12 w-full max-w-6xl px-4 sm:px-0"
+          style={{
+            borderTopColor: isDark
+              ? "rgba(255, 255, 255, 0.1)"
+              : "rgba(0, 0, 0, 0.1)",
+          }}
         >
           <h2
-            className={`text-2xl font-bold mb-8 text-center ${isDark ? "text-white" : "text-gray-900"}`}
+            className="text-xl sm:text-2xl lg:text-3xl font-bold mb-6 sm:mb-8 text-center transition-colors duration-300"
+            style={{ color: "var(--text-primary)" }}
           >
             Connect With Me On Social
           </h2>
-          <div className="flex flex-wrap gap-6 justify-center">
+          <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
             {socialLinks.map((link, index) => (
               <motion.a
                 key={index}
@@ -310,7 +447,30 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.15, rotate: 10 }}
                 whileTap={{ scale: 0.9 }}
-                className={`w-16 h-16 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-2xl transition-all hover:bg-blue-500/20 hover:border-blue-500/60 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-xl sm:text-2xl transition-all"
+                style={{
+                  backgroundColor: isDark
+                    ? "rgba(37, 99, 235, 0.1)"
+                    : "rgba(37, 99, 235, 0.05)",
+                  borderColor: isDark
+                    ? "rgba(37, 99, 235, 0.3)"
+                    : "rgba(37, 99, 235, 0.2)",
+                  borderWidth: "1px",
+                  color: "var(--accent-color)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(37, 99, 235, 0.2)";
+                  e.currentTarget.style.borderColor = "var(--color-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = isDark
+                    ? "rgba(37, 99, 235, 0.1)"
+                    : "rgba(37, 99, 235, 0.05)";
+                  e.currentTarget.style.borderColor = isDark
+                    ? "rgba(37, 99, 235, 0.3)"
+                    : "rgba(37, 99, 235, 0.2)";
+                }}
                 title={link.label}
               >
                 <i
@@ -322,9 +482,13 @@ export default function Contact() {
         </motion.div>
 
         {/* Footer */}
-        <motion.div variants={itemVariants} className="mt-16 text-center">
+        <motion.div
+          variants={itemVariants}
+          className="mt-12 sm:mt-16 text-center"
+        >
           <p
-            className={`text-sm ${isDark ? "text-gray-500" : "text-gray-600"}`}
+            className="text-xs sm:text-sm transition-colors duration-300"
+            style={{ color: "var(--text-tertiary)" }}
           >
             I'll get back to you as soon as possible
           </p>
