@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import resumePDF from "../resume.pdf";
+import resumePDF from "./resume.pdf";
 
 export default function Home() {
   const { isDark } = useTheme();
